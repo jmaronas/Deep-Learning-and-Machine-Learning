@@ -1,0 +1,10 @@
+numpy
+matplotlib
+scikit-learn
+jupyter==1.0.0
+notebook==6.4.12
+jupyter-tikz
+torch
+pdfplumber
+nbconvert
+jupyter_contrib_nbextensions
