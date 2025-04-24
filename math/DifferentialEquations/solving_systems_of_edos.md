@@ -27,6 +27,8 @@ From:
 $$
 \frac{d x(t)}{dt} &= y(t) - x(t)\\
 $$
+
+
 we recognize a non-homogeneous differential equation with $F=-1$; $L=1$; $C=0$ and $w(t) = y(t)$. The solution is.
 
 
@@ -39,7 +41,7 @@ However, the solution is still coupled since it depends on the form of $y(\tau)$
 
 
 $$
-\frac{d y(t)}{dt} &= x(t) - y(t)\\
+\frac{d y(t)}{dt} = x(t) - y(t)
 $$
 
 
@@ -97,7 +99,7 @@ we can take derivative on both sides yielding:
 
 
 $$
-\frac{d c(t)}{dt} &= \frac{d x(t)}{dt} - \frac{d y(t)}{dt}\\
+\frac{d c(t)}{dt} = \frac{d x(t)}{dt} - \frac{d y(t)}{dt}
 $$
 
 
@@ -153,7 +155,7 @@ $$
 &y(t) = y(t_0) + \frac{1}{2}\left[x(t_0)-y(t_0)\\\right]\left[1-e^{-2(t-t_0)}\right];\\
 &y(t) = y(t_0) + \left[\frac{1}{2}x(t_0)-\frac{1}{2}y(t_0)\\\right]\left[1-e^{-2(t-t_0)}\right];\\
 &y(t) = y(t_0) + \frac{1}{2}x(t_0)-\frac{1}{2}y(t_0) -\frac{1}{2}x(t_0)e^{-2(t-t_0)} +\frac{1}{2}y(t_0)e^{-2(t-t_0)};\\
-&y(t) = \frac{1}{2}y(t_0) + \frac{1}{2}y(t_0)e^{-2(t-t_0)}+\frac{1}{2}x(t_0) -\frac{1}{2}x(t_0)e^{-2(t-t_0)};\\
+&y(t) = \frac{1}{2}y(t_0) + \frac{1}{2}y(t_0)e^{-2(t-t_0)}+\frac{1}{2}x(t_0) -\frac{1}{2}x(t_0)e^{-2(t-t_0)};
 \end{split}
 $$
 
@@ -289,11 +291,7 @@ which we recognize as linear time invariant inhomogeneous ode with: $C =  y(t_0)
 $$
 \begin{split}
 x(t) &= x(t_0)e^{F(t-t_0)} + \int^{t}_{t_0} e^{F(t-\tau)}\left[Lw(\tau) + C\right]d \tau;\\
-%
-%
 x(t) &= x(t_0)e^{t_0-t} + \int^{t}_{t_0} e^{\tau-t}\left[-\frac{1}{2}c(t_0)e^{2t_0}e^{-2\tau} + C\right]d \tau;\\
-%
-%
 x(t) &= x(t_0)e^{t_0-t} -\frac{1}{2}c(t_0)e^{2t_0-t}\int^{t}_{t_0}e^{-\tau}d\tau+Ce^{-t}\int^t_{t_0} e^{\tau}d\tau;
 \end{split}
 $$
@@ -763,8 +761,6 @@ v^1_2 & v^2_2 & \cdots & v^{d-1}_2 & v^d_2 \\
 v^1_{d-1} & v^2_{d-1} & \cdots & v^{d-1}_{d-1} & v^d_{d-1} \\
 v^1_d & v^2_d & \cdots & v^{d-1}_d & v^d_d
 \end{pmatrix}\\
-%
-%
 &D = \begin{pmatrix}
 \lambda_1 & 0         & \cdots  & 0         & 0 \\
 0         & \lambda_2 & \cdots  & 0         & 0 \\
@@ -772,8 +768,6 @@ v^1_d & v^2_d & \cdots & v^{d-1}_d & v^d_d
 0         & 0         & \cdots  & \lambda_{d-1} & 0 \\
 0         & 0         & \cdots  & 0         & \lambda_{d}
 \end{pmatrix}\\
-%
-%
 &P^{-1} = P^T
 \end{split}
 $$
@@ -854,11 +848,11 @@ u_d(t_0) = v^d \cdot z(t_0) = \sum^D_{j=1} v^{d}_j z_j(t_0)
 $$
 
 
-So each of the coordinates of $z(t)$ (which are the different dimensions of $x(t)$ and $y(t)$) can be written down as:
+So each of the coordinates of $z(t)$ (which are the different dimensions of $x(t)$ and $y(t)$ ) can be written down as:
 
 
 $$
-z_d(t) = \sum^{D}_{j=1} v^{j}_d \sum^D_{i=1} v^{j}_i z_i(t_0)e^{\lambda_j(t-t_0)}\\
+z_d(t) = \sum^{D}_{j=1} v^{j}_d \sum^D_{i=1} v^{j}_i z_i(t_0)e^{\lambda_j(t-t_0)}
 $$
 
 
@@ -930,7 +924,7 @@ Applying the solution we have:
 $$
 \begin{split}
 x(t) &= \sum^{2}_{j=1} v^{j}_1 \sum^2_{i=1} v^{j}_i z_i(t_0)e^{\lambda_j(t-t_0)}\\
-y(t) &= \sum^{2}_{j=1} v^{j}_2 \sum^2_{i=1} v^{j}_i z_i(t_0)e^{\lambda_j(t-t_0)}\\
+y(t) &= \sum^{2}_{j=1} v^{j}_2 \sum^2_{i=1} v^{j}_i z_i(t_0)e^{\lambda_j(t-t_0)}
 \end{split}
 $$
 
@@ -943,7 +937,7 @@ $$
 x(t) &= \sum^{2}_{j=1} v^{j}_1 \sum^2_{i=1} v^{j}_i z_i(t_0)e^{\lambda_j(t-t_0)}\\
 &= \frac{1}{\sqrt{2}}\left\{\frac{1}{\sqrt{2}}x(t_0)e^{-2(t-t_0)} - \frac{1}{\sqrt{2}}y(t_0)e^{-2(t-t_0)} \right\}\\
 &+\frac{1}{\sqrt{2}}\left\{\frac{1}{\sqrt{2}}x(t_0)+\frac{1}{\sqrt{2}}y(t_0)\right\}\\
-&=\frac{1}{2}x(t_0)e^{-2(t-t_0)} - \frac{1}{2}y(t_0)e^{-2(t-t_0)}+\frac{1}{2}x(t_0)+\frac{1}{2}y(t_0)\\
+&=\frac{1}{2}x(t_0)e^{-2(t-t_0)} - \frac{1}{2}y(t_0)e^{-2(t-t_0)}+\frac{1}{2}x(t_0)+\frac{1}{2}y(t_0)
 \end{split}
 $$
 
@@ -956,7 +950,7 @@ $$
 y(t) &= \sum^{2}_{j=1} v^{j}_2 \sum^2_{i=1} v^{j}_i z_i(t_0)e^{\lambda_j(t-t_0)}\\
 &= -\frac{1}{\sqrt{2}}\left\{\frac{1}{\sqrt{2}}x(t_0)e^{-2(t-t_0)} - \frac{1}{\sqrt{2}}y(t_0)e^{-2(t-t_0)} \right\}\\
 &+\frac{1}{\sqrt{2}}\left\{\frac{1}{\sqrt{2}}x(t_0)+\frac{1}{\sqrt{2}}y(t_0)\right\}\\
-&=-\frac{1}{2}x(t_0)e^{-2(t-t_0)} + \frac{1}{2}y(t_0)e^{-2(t-t_0)}+\frac{1}{2}x(t_0)+\frac{1}{2}y(t_0)\\
+&=-\frac{1}{2}x(t_0)e^{-2(t-t_0)} + \frac{1}{2}y(t_0)e^{-2(t-t_0)}+\frac{1}{2}x(t_0)+\frac{1}{2}y(t_0)
 \end{split}
 $$
 
