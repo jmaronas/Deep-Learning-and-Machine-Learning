@@ -364,15 +364,16 @@ $$
 \end{cases}
 $$
 
-
 can be rewritten as:
+
 
 
 $$
 \frac{d z(t)}{dt} = A z(t)
 $$
-with:
 
+
+with:
 
 $$
 A = \begin{pmatrix}
