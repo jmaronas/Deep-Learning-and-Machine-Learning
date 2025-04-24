@@ -418,6 +418,8 @@ So the eigenvalues are $\lambda_1=-2$ and $\lambda_2=0$
 Eigenvectors $v_i$ are those who solve $Av_i=\lambda_i v_i$
 
 For the first eigenvalue $\lambda_1 = -2$ the eigenvector $v_1$ is obtained by:
+
+
 $$
 \begin{pmatrix}
 -1 & 1 \\
