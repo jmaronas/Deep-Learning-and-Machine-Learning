@@ -861,7 +861,7 @@ So each of the coordinates of $z(t)$ (which are the different dimensions of $x(t
 
 
 $$
-z_d(t) = \sum^{D}_{j=1} v^{j}_d \sum^D_{i=1} v^{j}_i z_i(t_0)e^{\lambda_j(t-t_0)}
+z_d(t) = \sum_{j=1}^{D} v_d^{j} \sum_{i=1}^D v_i^{j} z_i(t_0)e^{\lambda_j(t-t_0)}
 $$
 
 
@@ -932,8 +932,8 @@ Applying the solution we have:
 
 $$
 \begin{split}
-x(t) &= \sum^{2}_{j=1} v^{j}_1 \sum^2_{i=1} v^{j}_i z_i(t_0)e^{\lambda_j(t-t_0)}\\
-y(t) &= \sum^{2}_{j=1} v^{j}_2 \sum^2_{i=1} v^{j}_i z_i(t_0)e^{\lambda_j(t-t_0)}
+x(t) &= \sum_{j=1}^{2} v_1^{j} \sum_{i=1}^2 v_i^{j} z_i(t_0)e^{\lambda_j(t-t_0)}\\
+y(t) &= \sum_{j=1}^{2} v_2^{j} \sum_{i=1}^2 v_i^{j} z_i(t_0)e^{\lambda_j(t-t_0)}
 \end{split}
 $$
 
@@ -943,7 +943,7 @@ So:
 
 $$
 \begin{split}
-x(t) &= \sum^{2}_{j=1} v^{j}_1 \sum^2_{i=1} v^{j}_i z_i(t_0)e^{\lambda_j(t-t_0)}\\
+x(t) &= \sum_{j=1}^{2} v_1^{j} \sum_{i=1}^2 v_i^{j} z_i(t_0)e^{\lambda_j(t-t_0)}\\
 &= \frac{1}{\sqrt{2}}\left\{\frac{1}{\sqrt{2}}x(t_0)e^{-2(t-t_0)} - \frac{1}{\sqrt{2}}y(t_0)e^{-2(t-t_0)} \right\}\\
 &+\frac{1}{\sqrt{2}}\left\{\frac{1}{\sqrt{2}}x(t_0)+\frac{1}{\sqrt{2}}y(t_0)\right\}\\
 &=\frac{1}{2}x(t_0)e^{-2(t-t_0)} - \frac{1}{2}y(t_0)e^{-2(t-t_0)}+\frac{1}{2}x(t_0)+\frac{1}{2}y(t_0)
@@ -956,7 +956,7 @@ and:
 
 $$
 \begin{split}
-y(t) &= \sum^{2}_{j=1} v^{j}_2 \sum^2_{i=1} v^{j}_i z_i(t_0)e^{\lambda_j(t-t_0)}\\
+y(t) &= \sum_{j=1}^{2} v_2^{j} \sum_{i=1}^2 v_i^{j} z_i(t_0)e^{\lambda_j(t-t_0)}\\
 &= -\frac{1}{\sqrt{2}}\left\{\frac{1}{\sqrt{2}}x(t_0)e^{-2(t-t_0)} - \frac{1}{\sqrt{2}}y(t_0)e^{-2(t-t_0)} \right\}\\
 &+\frac{1}{\sqrt{2}}\left\{\frac{1}{\sqrt{2}}x(t_0)+\frac{1}{\sqrt{2}}y(t_0)\right\}\\
 &=-\frac{1}{2}x(t_0)e^{-2(t-t_0)} + \frac{1}{2}y(t_0)e^{-2(t-t_0)}+\frac{1}{2}x(t_0)+\frac{1}{2}y(t_0)
