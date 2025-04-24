@@ -837,7 +837,7 @@ So each of the $z_d(t)$ solutions is given by:
 
 
 $$
-z_d(t) = \sum^{D}_{j=1} v^{j}_d u_j(t) = \sum^{D}_{j=1} v^{j}_d u_j(t_0)e^{\lambda_j (t-t_0)}
+z_d(t) = \sum_{j=1}^{D} v_d^{j} u_j(t) = \sum_{j=1}^{D} v_d^{j} u_j(t_0)e^{\lambda_j (t-t_0)}
 $$
 
 
