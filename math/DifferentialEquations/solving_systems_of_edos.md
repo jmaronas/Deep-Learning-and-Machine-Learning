@@ -25,7 +25,7 @@ From:
 
 
 $$
-\frac{d x(t)}{dt} &= y(t) - x(t)\\
+\frac{d x(t)}{dt} = y(t) - x(t)
 $$
 
 
@@ -147,17 +147,20 @@ $$
 $$
 
 
+
 Finally substituting initial condition $c(t_0) = x(t_0)-y(t_0)$, yields:
+
 
 
 $$
 \begin{split}
-&y(t) = y(t_0) + \frac{1}{2}\left[x(t_0)-y(t_0)\\\right]\left[1-e^{-2(t-t_0)}\right];\\
-&y(t) = y(t_0) + \left[\frac{1}{2}x(t_0)-\frac{1}{2}y(t_0)\\\right]\left[1-e^{-2(t-t_0)}\right];\\
+&y(t) = y(t_0) + \frac{1}{2}\left[x(t_0)-y(t_0)\right]\left[1-e^{-2(t-t_0)}\right];\\
+&y(t) = y(t_0) + \left[\frac{1}{2}x(t_0)-\frac{1}{2}y(t_0)\right]\left[1-e^{-2(t-t_0)}\right];\\
 &y(t) = y(t_0) + \frac{1}{2}x(t_0)-\frac{1}{2}y(t_0) -\frac{1}{2}x(t_0)e^{-2(t-t_0)} +\frac{1}{2}y(t_0)e^{-2(t-t_0)};\\
 &y(t) = \frac{1}{2}y(t_0) + \frac{1}{2}y(t_0)e^{-2(t-t_0)}+\frac{1}{2}x(t_0) -\frac{1}{2}x(t_0)e^{-2(t-t_0)};
 \end{split}
 $$
+
 
 
 We now solve for $x(t)$ to show how different option yield different ways to arrive at the same solution, with different complexity.
@@ -284,8 +287,8 @@ $$
 \frac{d x(t)}{dt} =  y(t_0) + \frac{1}{2}c(t_0) -\frac{1}{2}c(t_0)e^{2t_0}e^{-2t} - x(t);\\
 $$
 
-
 which we recognize as linear time invariant inhomogeneous ode with: $C =  y(t_0) + \frac{1}{2}c(t_0)$, $L=-\frac{1}{2}c(t_0)e^{2t_0}$, $w(t) = e^{-2t}$  and $F = -1$. We know the solution to this ODE is given by:
+
 
 
 $$
@@ -295,17 +298,19 @@ x(t) &= x(t_0)e^{t_0-t} + \int^{t}_{t_0} e^{\tau-t}\left[-\frac{1}{2}c(t_0)e^{2t
 x(t) &= x(t_0)e^{t_0-t} -\frac{1}{2}c(t_0)e^{2t_0-t}\int^{t}_{t_0}e^{-\tau}d\tau+Ce^{-t}\int^t_{t_0} e^{\tau}d\tau;
 \end{split}
 $$
- 
+
+
 
 We now solve each integral separately:
+
 
 
 $$
 -\frac{1}{2}c(t_0)e^{2t_0-t}\int^{t}_{t_0}e^{-\tau}d\tau = \frac{1}{2}c(t_0)\left[e^{2t_0-2t} - e^{t_0-t}\right]
 $$
 
-
 and
+
 
 
 $$
