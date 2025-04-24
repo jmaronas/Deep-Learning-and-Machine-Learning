@@ -7,6 +7,8 @@ With any loss of generality, beyond changing exponentials for matrix exponential
 ## Homogeneous
 
 An homogeneous ode is given by:
+
+
 $$
 \begin{split}
 \frac{d y(t)}{d t} &= Fy(t);\\
@@ -16,6 +18,8 @@ $$
 where $F$ is an element (scalar, matrix, etc) that does not depend on time and $C$ is any constant value.
 
 The solution to this ODE can be obtained by the method of variable separation and the solution is given by:
+
+
 $$
 y(t) = e^{F(t-t_0)}y(t_0)
 $$
@@ -23,6 +27,8 @@ $$
 ## Non Homogeneous ODE
 
 A non-homogeneus ODE is given by:
+
+
 $$
 \begin{split}
 \frac{d y(t)}{d t} &= Fy(t) + L w(t) + C;\\
@@ -32,6 +38,8 @@ $$
 where $L$ is similar to $F$ and does not depend on time. $C$ denotes a constant and $w$ is any other function of time.
 
 The solution can be obtained by the method of integrating factor, and is given by:
+
+
 $$
 y(t) = e^{F(t-t_0)}y(t_0) + \int^t_{t_0} e^{F(t-\tau)} \left[L w(\tau) + C \right] d\tau;
 $$
@@ -40,6 +48,8 @@ Note that here the solution has an integral given by the convolution between two
 ## Homogeneous Time Variant ODE
 
 An homogeneous time variant ODE is given by:
+
+
 $$
 \begin{split}
 \frac{d y(t)}{d t} &= F(t)y(t) ;\\
@@ -47,6 +57,8 @@ y(t_0) &= \alpha
 \end{split}
 $$
 with solution given by:
+
+
 $$
 y(t) = \Psi(t,t_0) y(t_0)
 $$
@@ -62,6 +74,8 @@ y(t_0) &= \alpha
 $$
 
 with solution given by:
+
+
 $$
 y(t) = \Psi(t,t_0)y(t_0) + \int^t_{t_0} \Psi(t,\tau) L w(\tau)d\tau;
 $$
@@ -80,6 +94,8 @@ $$
 $$
 
 The solution is:
+
+
 $$
 y(t) = e^{F(t-t_0)}y(t_0) + \int^t_{t_0} e^{F(t-\tau)}  C d\tau;\\
 y(t) = e^{F(t-t_0)}y(t_0) -\frac{C}{F}\left[1-e^{F(t-t_0)}\right]\\
@@ -93,6 +109,8 @@ $$
 $$
 
 The solution is:
+
+
 $$
 y(t) = y(t_0) + \int^t_{t_0} \left[L w(\tau) + C \right] d\tau;\\
 y(t) = y(t_0) + C(t-t_0) + L \int^t_{t_0} w(\tau)d\tau;
