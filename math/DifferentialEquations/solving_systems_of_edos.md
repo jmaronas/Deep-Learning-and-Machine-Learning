@@ -764,11 +764,11 @@ Under our assumption $A$ is always diagonizable, i.e we can express $A=PDP^{-1}$
 $$
 \begin{split}
 &P = \begin{pmatrix}
-v^1_1 & v^2_1 & \cdots & v^{d-1}_1 & v^d_1 \\
-v^1_2 & v^2_2 & \cdots & v^{d-1}_2 & v^d_2 \\
+v_1^1 & v_1^2 & \cdots & v_1^{d-1} & v_1^d \\
+v_2^1 & v_2^2 & \cdots & v_2^{d-1} & v_2^d \\
 \vdots & \vdots & \ddots & \vdots & \vdots \\
-v^1_{d-1} & v^2_{d-1} & \cdots & v^{d-1}_{d-1} & v^d_{d-1} \\
-v^1_d & v^2_d & \cdots & v^{d-1}_d & v^d_d
+v_{d-1}^1 & v_{d-1}^2 & \cdots & v_{d-1}^{d-1} & v_{d-1}^d \\
+v_d^1 & v_d^2 & \cdots & v_d^{d-1} & v_d^d
 \end{pmatrix}\\
 &D = \begin{pmatrix}
 \lambda_1 & 0         & \cdots  & 0         & 0 \\
@@ -944,8 +944,8 @@ So:
 $$
 \begin{split}
 x(t) &= \sum_{j=1}^{2} v_1^{j} \sum_{i=1}^2 v_i^{j} z_i(t_0)e^{\lambda_j(t-t_0)}\\
-&= \frac{1}{\sqrt{2}}\left\{\frac{1}{\sqrt{2}}x(t_0)e^{-2(t-t_0)} - \frac{1}{\sqrt{2}}y(t_0)e^{-2(t-t_0)} \right\}\\
-&+\frac{1}{\sqrt{2}}\left\{\frac{1}{\sqrt{2}}x(t_0)+\frac{1}{\sqrt{2}}y(t_0)\right\}\\
+&= \frac{1}{\sqrt{2}}\left[\frac{1}{\sqrt{2}}x(t_0)e^{-2(t-t_0)} - \frac{1}{\sqrt{2}}y(t_0)e^{-2(t-t_0)} \right]\\
+&+\frac{1}{\sqrt{2}}\left[\frac{1}{\sqrt{2}}x(t_0)+\frac{1}{\sqrt{2}}y(t_0)\right]\\
 &=\frac{1}{2}x(t_0)e^{-2(t-t_0)} - \frac{1}{2}y(t_0)e^{-2(t-t_0)}+\frac{1}{2}x(t_0)+\frac{1}{2}y(t_0)
 \end{split}
 $$
@@ -957,8 +957,8 @@ and:
 $$
 \begin{split}
 y(t) &= \sum_{j=1}^{2} v_2^{j} \sum_{i=1}^2 v_i^{j} z_i(t_0)e^{\lambda_j(t-t_0)}\\
-&= -\frac{1}{\sqrt{2}}\left\{\frac{1}{\sqrt{2}}x(t_0)e^{-2(t-t_0)} - \frac{1}{\sqrt{2}}y(t_0)e^{-2(t-t_0)} \right\}\\
-&+\frac{1}{\sqrt{2}}\left\{\frac{1}{\sqrt{2}}x(t_0)+\frac{1}{\sqrt{2}}y(t_0)\right\}\\
+&= -\frac{1}{\sqrt{2}}\left[\frac{1}{\sqrt{2}}x(t_0)e^{-2(t-t_0)} - \frac{1}{\sqrt{2}}y(t_0)e^{-2(t-t_0)} \right]\\
+&+\frac{1}{\sqrt{2}}\left[\frac{1}{\sqrt{2}}x(t_0)+\frac{1}{\sqrt{2}}y(t_0)\right]\\
 &=-\frac{1}{2}x(t_0)e^{-2(t-t_0)} + \frac{1}{2}y(t_0)e^{-2(t-t_0)}+\frac{1}{2}x(t_0)+\frac{1}{2}y(t_0)
 \end{split}
 $$
