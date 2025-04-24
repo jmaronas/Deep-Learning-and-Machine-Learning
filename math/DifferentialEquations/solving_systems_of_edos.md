@@ -395,6 +395,8 @@ where $D$ is a diagonal matrix where each element in the diagonal is an eigenval
 ##### Computing eigenvalues $\lambda_i$
 
 The eigenvalues are obtained by solving:
+
+
 $$
 \begin{split}
 &\det(A-\lambda I) = 0\\
@@ -407,6 +409,8 @@ $$
 &\lambda(\lambda+2)=0
 \end{split}
 $$
+
+
 So the eigenvalues are $\lambda_1=-2$ and $\lambda_2=0$
 
 ##### Computing eigenvectors $\lambda_i$
@@ -828,8 +832,8 @@ $$
 z(t) = Pu(t)
 $$
 
-
 So each of the $z_d(t)$ solutions is given by:
+
 
 
 $$
@@ -837,8 +841,8 @@ z_d(t) = \sum^{D}_{j=1} v^{j}_d u_j(t) = \sum^{D}_{j=1} v^{j}_d u_j(t_0)e^{\lamb
 $$
 
 
-Initial conditions are recovered back by:
 
+Initial conditions are recovered back by:
 
 $$
 u(t_0) = P^T z(t_0)
