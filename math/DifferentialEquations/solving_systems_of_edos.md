@@ -293,9 +293,9 @@ which we recognize as linear time invariant inhomogeneous ode with: $C =  y(t_0)
 
 $$
 \begin{split}
-x(t) &= x(t_0)e^{F(t-t_0)} + \int^{t}_{t_0} e^{F(t-\tau)}\left[Lw(\tau) + C\right]d \tau;\\
-x(t) &= x(t_0)e^{t_0-t} + \int^{t}_{t_0} e^{\tau-t}\left[-\frac{1}{2}c(t_0)e^{2t_0}e^{-2\tau} + C\right]d \tau;\\
-x(t) &= x(t_0)e^{t_0-t} -\frac{1}{2}c(t_0)e^{2t_0-t}\int^{t}_{t_0}e^{-\tau}d\tau+Ce^{-t}\int^t_{t_0} e^{\tau}d\tau;
+x(t) &= x(t_0)e^{F(t-t_0)} + \int_{t_0}^{t} e^{F(t-\tau)}\left[Lw(\tau) + C\right]d \tau;\\
+x(t) &= x(t_0)e^{t_0-t} + \int_{t_0}^{t} e^{\tau-t}\left[-\frac{1}{2}c(t_0)e^{2t_0}e^{-2\tau} + C\right]d \tau;\\
+x(t) &= x(t_0)e^{t_0-t} -\frac{1}{2}c(t_0)e^{2t_0-t}\int_{t_0}^{t} e^{-\tau}d\tau+Ce^{-t}\int_{t_0}^t e^{\tau}d\tau;
 \end{split}
 $$
 
@@ -369,7 +369,7 @@ can be rewritten as:
 
 
 $$
-\frac{d z(t)}{dt} = A z(t) \\
+\frac{d z(t)}{dt} = A z(t)
 $$
 with:
 
