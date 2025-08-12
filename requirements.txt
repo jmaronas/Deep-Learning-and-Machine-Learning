@@ -1,10 +1,14 @@
 numpy
 matplotlib
 scikit-learn
+scikit-image
 jupyter==1.0.0
-notebook==6.4.12
+notebook==6.5.6
 jupyter-tikz
 torch
+torchvision
 pdfplumber
 nbconvert
 jupyter_contrib_nbextensions
+imageio
+imageio[ffmpeg]
