@@ -20,16 +20,16 @@ class Arrow3D(FancyArrowPatch):
         return np.min(zs)
 
 ## function implementing squared loss function
-def squared_loss_function(t,y):
+def squared_loss_function(t,y,*args):
     return (t-y)**2
 
 brier_loss_function = squared_loss_function
 
-def absolute_loss_function(t,y):
+def absolute_loss_function(t,y,*args):
     return np.abs(t-y)
 
 ## funciton implementing binary cross entropy
-def bce_loss_function(t,y, clip = None):
+def bce_loss_function(t,y, clip = None,*args):
     idx_0 = t==0
     idx_1 = ~idx_0
 
@@ -40,10 +40,10 @@ def bce_loss_function(t,y, clip = None):
 
     ## add +- 1e12 for numerical stability on infs
     if isinstance(clip,float):
-        loss[loss == np.inf] = 1e12
-        loss[loss == -np.inf] = -1e12
+        loss[loss == np.inf] = clip
+        loss[loss == -np.inf] = -clip
 
-    return - loss
+    return -1*loss
 
 ## function implementing an activation function
 def activation_function_linear(x):
@@ -68,11 +68,14 @@ def computation_graph_sigmoid(x,w,b):
     return y
 
 ## function that initializes the values of a computational graph
-def create_computation_graph_linear(n_in,n_out):
+def create_computation_graph_linear(n_in,n_out, mean = 0, std = 1):
     ''' Create elements of the computational graph'''
     # parameters
     w = np.random.randn(n_in,n_out) # get a random value from standard normal distribution
     b = np.random.randn(n_out,) + 1 # get a random value from Gaussian with mean 0 and standard deviation 5.
+
+    w = w * std + mean
+    b = b * std + mean
 
     return w,b
 
@@ -114,5 +117,57 @@ def grad_absolute_loss_wrt_linear_model(x,t,w,b):
 
     grad_w = np.sum(dL_dy*x, axis = 0, keepdims = True)
     grad_b = np.sum(dL_dy, axis = 0, keepdims = True)
+
+    return grad_w, grad_b
+
+def grad_bce_loss_wrt_sigmoid_model(x,t,w,b):
+    """
+    Applies chain rule.
+    """
+    ## forward operation
+    z = computation_graph_linear(x,w,b)
+    y = activation_function_sigmoid(z)
+
+    ## backward operation (compute gradients / backpropagation / reverse mode autodiff)
+    idx_0 = t==0
+    idx_1 = ~idx_0
+
+    dL_dy = np.zeros(y.shape)
+
+    # dL/dy. 1e-12 is added/substracted for stability on +-inf values
+    dL_dy[idx_0] = - 1/(1-y[idx_0])
+    dL_dy[idx_1] = 1/y[idx_1]
+    dL_dy[dL_dy == np.inf] = 1e12
+    dL_dy[dL_dy == -np.inf] = -1e12
+
+    dL_dy *= -1
+
+    # dy/dz
+    dy_dz = activation_function_sigmoid(z)*(1-activation_function_sigmoid(z))
+
+    grad_w = np.transpose(np.sum(dL_dy*dy_dz*x, axis = 0, keepdims = True))
+    grad_b = np.sum(dL_dy*dy_dz, axis = 0, keepdims = True)
+
+    return grad_w, grad_b
+
+
+def grad_brier_loss_wrt_sigmoid_model(x,t,w,b):
+    """
+    Applies chain rule.
+    """
+    ## forward operation
+    z = computation_graph_linear(x,w,b)
+    y = activation_function_sigmoid(z)
+
+    ## backward operation (compute gradients / backpropagation / reverse mode autodiff)
+
+    # dL/dy
+    dL_dy = -2*(t-y)
+
+    # dy/dz
+    dy_dz = activation_function_sigmoid(z)*(1-activation_function_sigmoid(z))
+
+    grad_w = np.transpose(np.sum(dL_dy*dy_dz*x, axis = 0, keepdims = True))
+    grad_b = np.sum(dL_dy*dy_dz, axis = 0, keepdims = True)
 
     return grad_w, grad_b
