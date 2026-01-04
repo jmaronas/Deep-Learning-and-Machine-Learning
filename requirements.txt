@@ -11,3 +11,4 @@ pdfplumber
 nbconvert
 imageio
 imageio[ffmpeg]
+pandas
