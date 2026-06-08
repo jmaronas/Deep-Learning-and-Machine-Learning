@@ -8,7 +8,6 @@ With any loss of generality, beyond changing exponentials for matrix exponential
 
 An homogeneous ode is given by:
 
-
 $$
 \begin{split}
 \frac{d y(t)}{d t} &= Fy(t);\\
@@ -16,11 +15,9 @@ y(t_0) &= \alpha
 \end{split}
 $$
 
-
-where $F$ is an element (scalar, matrix, etc) that does not depend on time and $C$ is any constant value.
+where $F$ is an element (scalar, matrix, etc) that does not depend on time.
 
 The solution to this ODE can be obtained by the method of variable separation and the solution is given by:
-
 
 $$
 y(t) = e^{F(t-t_0)}y(t_0)
@@ -30,7 +27,6 @@ $$
 
 A non-homogeneus ODE is given by:
 
-
 $$
 \begin{split}
 \frac{d y(t)}{d t} &= Fy(t) + L w(t) + C;\\
@@ -38,23 +34,19 @@ y(t_0) &= \alpha
 \end{split}
 $$
 
-
 where $L$ is similar to $F$ and does not depend on time. $C$ denotes a constant and $w$ is any other function of time.
 
 The solution can be obtained by the method of integrating factor, and is given by:
 
-
 $$
 y(t) = e^{F(t-t_0)}y(t_0) + \int^t_{t_0} e^{F(t-\tau)} \left[L w(\tau) + C \right] d\tau;
 $$
-
 
 Note that here the solution has an integral given by the convolution between two signals, and is the reason why Linear Time Invariant systems use the convolution to obtain the output, something I was taught as: "this is like this because I say it" rather than giving out the real reasons. Obviously I need to elaborate further on this claim to show where this really come true for any convolution.
 
 ## Homogeneous Time Variant ODE
 
 An homogeneous time variant ODE is given by:
-
 
 $$
 \begin{split}
@@ -63,16 +55,11 @@ y(t_0) &= \alpha
 \end{split}
 $$
 
-
 with solution given by:
-
-
-
 
 $$
 y(t) = \Psi(t,t_0) y(t_0)
 $$
-
 
 where the function $\Psi$ must satisfy some properties see the book from Arno Solin equation 2.34.
 
@@ -98,19 +85,14 @@ We can have several special cases from the above solutions that are useful for d
 
 First note that a non-homogeneous ode generalizes homogeneous ode. Basically the solution is the homogeneous one plus the fluctuations introduced by the other function through a convolution. So in other words if we set $L=0$  and $C=0$ we recover the homogeneous solution.
 
-#### Case L = 0
+### Case L = 0
 
 $$
 \begin{split}\frac{d y(t)}{d t} &= Fy(t) + C;\\
 y(t_0) &= \alpha\end{split}
 $$
 
-
-
 The solution is:
-
-
-
 
 $$
 \begin{split}
@@ -128,12 +110,7 @@ y(t_0) &= \alpha
 \end{split}
 $$
 
-
-
 The solution is:
-
-
-
 
 $$
 \begin{split}

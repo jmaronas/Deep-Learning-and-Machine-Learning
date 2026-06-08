@@ -1,6 +1,6 @@
 # Solving First order Linear Differential Equations
 
-### Integrating factor method to solve ODE
+## Integrating factor method to solve ODE
 
 This method of integration can be used to construct the solution to an non-homogeneous ODE.
 

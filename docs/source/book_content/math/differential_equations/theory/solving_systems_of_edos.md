@@ -165,7 +165,7 @@ $$
 
 We now solve for $x(t)$ to show how different option yield different ways to arrive at the same solution, with different complexity.
 
-#### Solving for x(t) option 1 (super easy)
+### Solving for x(t) option 1 (super easy)
 
 Using the fact that $c(t) = x(t) - y(t)$, we know that $x(t) = c(t) + y(t)$.  Since we know $c(t)$ and $y(t)$ we can substitute. This yields:
 
@@ -197,7 +197,7 @@ where the only reason to using bold notation is to highlight the solution.
 
 
 
-#### Solving for x(t) option 2 (easy)
+### Solving for x(t) option 2 (easy)
 
 Once $c(t)$ is solved, we could use the fact that $c(t) = x(t)-y(t)$  is true, in a different way. Rather than noting that:
 
@@ -270,7 +270,7 @@ where the only reason to using bold notation is to highlight the solution.
 
 
 
-#### Solving for x(t) option 3 (you'll better take a beer)
+### Solving for x(t) option 3 (you'll better take a beer)
 
 Once we have solved for $y(t)$ we can substitute into $\frac{d x(t)}{dt} = y(t) - x(t)$ and solve the resulting differential equation. This gives:
 
@@ -393,7 +393,7 @@ We can write $A = PDP^{-1}$
 
 where $D$ is a diagonal matrix where each element in the diagonal is an eigenvalue of $A$, and $P$ is a matrix with columns given by the eigenvectors.
 
-##### Computing eigenvalues $\lambda_i$
+#### Computing eigenvalues $\lambda_i$
 
 The eigenvalues are obtained by solving:
 
@@ -414,7 +414,7 @@ $$
 
 So the eigenvalues are $\lambda_1=-2$ and $\lambda_2=0$
 
-##### Computing eigenvectors $\lambda_i$
+#### Computing eigenvectors $\lambda_i$
 
 Eigenvectors $v_i$ are those who solve $Av_i=\lambda_i v_i$
 
@@ -598,7 +598,7 @@ $$
 
 
 
-##### Removing the change of variables
+#### Removing the change of variables
 
 To return to the solution in terms of $z(t)= [x(t),y(t)]^T$ we revert the change of variables $u(t) = P^{-1}z(t)$ to get $z(t)$ in terms of $u(t)$. To do so, since $Pu(t)=z(t)$ we have:
 
@@ -632,7 +632,7 @@ $$
 
 
 
-##### Setting up initial conditions.
+#### Setting up initial conditions.
 
 To get the initial conditions, we need to obtain $u(t_0)$  from $z(t_0)$ to replace in the solution. So now instead of getting $z(t)$ from $u(t)$ as we have just done to get the solution, we need the opposite.
 
@@ -869,7 +869,7 @@ $$
 
 
 
-##### Example
+#### Example
 
 Let's check if this global solution holds for our previous example. First of all note that:
 
@@ -980,6 +980,6 @@ $$
 
 
 
-# References
+## References
 
 [1] https://users.aalto.fi/~asolin/sde-book/sde-book.pdf
