@@ -171,3 +171,18 @@ def grad_brier_loss_wrt_sigmoid_model(x,t,w,b):
     grad_b = np.sum(dL_dy*dy_dz, axis = 0, keepdims = True)
 
     return grad_w, grad_b
+
+
+def fit_norm2_least_square(X,T, lam = 0):
+
+    # Obtain optimum model
+    XtX = np.transpose(X) @ X
+    Xty = np.transpose(X) @ T
+
+    XtX += lam * np.eye(XtX.shape[0])
+
+    # withouth regularization
+    w_opt = np.linalg.solve(XtX, Xty)
+
+    return w_opt
+
