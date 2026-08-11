@@ -1,4 +1,6 @@
 import numpy as np
+from scipy.special import digamma, gammaln
+from scipy.optimize import brentq
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.patches import FancyArrowPatch
@@ -29,8 +31,19 @@ def absolute_loss_function(t,y,*args):
     return np.abs(t-y)
 
 ## function implementing the loss induced by a Student-t likelihood (nu degrees of freedom, scale sigma2)
+## only the part that depends on w,b (valid for optimizing over w,b with sigma2,nu fixed):
+## drops the (nu+1)/2 factor, the log(sigma) term and the log-Gamma constants, since none of
+## them depend on w,b and therefore do not change where the loss is minimized wrt w,b
 def student_t_loss_function(t,y,nu,sigma2=1,*args):
     return np.log(1 + (t-y)**2 / (nu*sigma2))
+
+## full negative log-likelihood of the Student-t model, including the sigma2 and nu dependent
+## terms dropped by student_t_loss_function; needed to track the loss when sigma2 and/or nu
+## are also being optimized (e.g. joint gradient descent on w,b,sigma2,nu)
+def student_t_full_loss_function(t,y,nu,sigma2,*args):
+    r = t-y
+    return (-gammaln((nu+1)/2) + gammaln(nu/2) + 0.5*np.log(nu*np.pi) + 0.5*np.log(sigma2)
+            + (nu+1)/2*np.log(1 + r**2/(nu*sigma2)))
 
 ## function implementing the loss induced by a heteroscedastic Gaussian likelihood (per-point variance v)
 def heteroscedastic_loss_function(t,y,v,*args):
@@ -53,6 +66,22 @@ def bce_loss_function(t,y, clip = None,*args):
 
     return -1*loss
 
+## function implementing categorical cross entropy (multiclass generalization of BCE)
+def categorical_crossentropy_loss_function(t,y, clip = None,*args):
+    '''
+    t,y have shape (N,K): t is one-hot (one row per point, a 1 in the true class, 0 elsewhere),
+    y is a predicted probability vector per point (e.g. the output of a softmax). Returns the
+    per-point loss, shape (N,1).
+    '''
+    log_y = np.log(y)
+
+    ## add +- 1e12 for numerical stability on infs, same convention as bce_loss_function
+    if isinstance(clip,float):
+        log_y[log_y == np.inf] = clip
+        log_y[log_y == -np.inf] = -clip
+
+    return -np.sum(t*log_y, axis=1, keepdims=True)
+
 ## function implementing an activation function
 def activation_function_linear(x):
     return x
@@ -73,6 +102,18 @@ def activation_function_softplus(x):
 def activation_function_exponential(x):
     return np.exp(x)
 
+## activation function softmax
+def activation_function_softmax(z):
+    '''
+    Row-wise softmax. z has shape (N,K); returns y with shape (N,K), each row summing to 1.
+    Subtracts the row-wise max before exponentiating for numerical stability (does not
+    change the result, since softmax is invariant to adding the same constant to every
+    logit in a row).
+    '''
+    z_shift = z - np.max(z, axis=1, keepdims=True)
+    exp_z = np.exp(z_shift)
+    return exp_z / np.sum(exp_z, axis=1, keepdims=True)
+
 ## function that implements the computational graph
 def computation_graph_linear(x,w,b):
     '''
@@ -89,6 +130,19 @@ def computation_graph_sigmoid(x,w,b):
     # this is the W^0 x from the theory above implemented using a transposition ;)
     y = activation_function_sigmoid(np.matmul(x,w) + b)
     return y
+
+## function that implements the computational graph
+def computation_graph_softmax(x,w,b):
+    '''
+    This function represents a computational graph, a neural network, that implements a
+    linear operation followed by a Softmax link.
+    Assumes classification R^D -> K classes: x has shape (N,D), w has shape (D,K), and,
+    unlike every other computation_graph_* above, b has shape (1,K) rather than (K,1)
+    (we need it to broadcast against the (N,K) result of x@w, one bias per class, not
+    one bias per sample). Returns y with shape (N,K), each row a probability vector.
+    '''
+    z = np.matmul(x,w) + b
+    return activation_function_softmax(z)
 
 ## function that implements the computational graph
 def computation_graph_relu(x,w,b):
@@ -225,24 +279,54 @@ def grad_absolute_loss_wrt_linear_model(x,t,w,b):
 
     return grad_w, grad_b
 
-def grad_student_t_loss_wrt_linear_model(x,t,w,b,nu,sigma2=1):
+def grad_student_t_loss_wrt_linear_model(x,t,w,b,nu,sigma2,only_sigma=False,only_nu=False):
     """
     Assumes regression R^D -> R (single output): w has shape (D,1) and b has shape (1,1).
-    nu (degrees of freedom) is required, sigma2 (scale) defaults to 1.
+    nu (degrees of freedom) and sigma2 (scale) are both required.
+
+    Returns the gradients of the negative log-likelihood wrt w,b (grad_w,grad_b), sigma2
+    (grad_sigma2) and nu (grad_nu), reusing the residual r=t-y and denom=nu*sigma2+r**2
+    across all of them instead of recomputing the forward pass for each parameter.
+
+    If only_sigma=True, only grad_sigma2 is computed and returned (used when w,b instead
+    gets the EM/IRLS step from step_student_t_least_square, and sigma is updated by a
+    Generalized EM gradient step). If only_nu=True, only grad_nu is computed and returned.
     """
+    N = x.shape[0]
+
     ## forward operation
     y = computation_graph_linear(x,w,b)
+
+    ## shared terms
+    r = t-y
+    denom = nu*sigma2 + r**2
+    sum_r2_over_denom = np.sum(r**2/denom)
+
+    if only_sigma:
+        grad_sigma2 = (N - (nu+1)*sum_r2_over_denom) / (2*sigma2)
+        return grad_sigma2
+
+    if only_nu:
+        grad_nu = (-0.5*N*digamma((nu+1)/2) + 0.5*N*digamma(nu/2) + N/(2*nu)
+                   + 0.5*np.sum(np.log(1 + r**2/(nu*sigma2)))
+                   - (nu+1)/(2*nu)*sum_r2_over_denom)
+        return grad_nu
 
     ## backward operation (compute gradients / backpropagation / reverse mode autodiff)
 
     # dL/dy
-    diff = t-y
-    dL_dy = -2*diff / (nu*sigma2 + diff**2)
+    dL_dy = -2*r / denom
 
     grad_w = np.transpose(np.sum(dL_dy*x, axis = 0, keepdims = True))
     grad_b = np.transpose(np.sum(dL_dy, axis = 0, keepdims = True))
 
-    return grad_w, grad_b
+    grad_sigma2 = (N - (nu+1)*sum_r2_over_denom) / (2*sigma2)
+
+    grad_nu = (-0.5*N*digamma((nu+1)/2) + 0.5*N*digamma(nu/2) + N/(2*nu)
+               + 0.5*np.sum(np.log(1 + r**2/(nu*sigma2)))
+               - (nu+1)/(2*nu)*sum_r2_over_denom)
+
+    return grad_w, grad_b, grad_sigma2, grad_nu
 
 def grad_heteroscedastic_loss_wrt_linear_model(x,t,w,b,w_sigma,b_sigma,only_sigma=False,x_sigma=None):
     """
@@ -387,6 +471,28 @@ def grad_brier_loss_wrt_sigmoid_model(x,t,w,b):
     return grad_w, grad_b
 
 
+def grad_categorical_crossentropy_loss_wrt_softmax_model(x,t,w,b):
+    """
+    Applies chain rule. x has shape (N,D), t (one-hot) and y have shape (N,K),
+    w has shape (D,K), b has shape (1,K) (see computation_graph_softmax).
+
+    The softmax Jacobian dy/dz is not diagonal (every y_k depends on every z_j), and
+    neither is the loss's own dL/dy; but exactly as for BCE, the two combine and
+    collapse into the same clean residual, dL/dz = y-t (derived in the theory notebook).
+    """
+    ## forward operation
+    y = computation_graph_softmax(x,w,b)
+
+    ## backward operation (compute gradients / backpropagation / reverse mode autodiff)
+
+    # dL/dz, already simplified (see above)
+    dL_dz = y-t
+
+    grad_w = np.matmul(np.transpose(x), dL_dz)
+    grad_b = np.sum(dL_dz, axis = 0, keepdims = True)
+
+    return grad_w, grad_b
+
 def grad_squared_loss_wrt_relu_model(x,t,w,b):
     """
     Applies chain rule.
@@ -502,27 +608,28 @@ def fit_ols_heteroscedastic(x,t,w_sigma,b_sigma,x_sigma=None):
 
     return w_new, b_new
 
-def step_student_t_least_square(x,t,w,b,nu,sigma2=1):
+def student_t_e_step(x,t,w,b,nu,sigma2):
     """
-    EM Algorithm (coincides with IRLS (Iteratively Reweighted Least Squares))
-    for the Student-t likelihood. Performs a single step (E step + M step).
+    E step of the EM/ECME algorithm for the Student-t likelihood: computes the exact
+    expected precision weight, pi_n = E[tau_n] = (nu+1)*sigma2/(nu*sigma2+r_n**2), from
+    the Gaussian scale-mixture representation of the Student-t, given the current
+    (w,b,nu,sigma2). Computed once per iteration and reused, unchanged, by the three
+    M-steps below (student_t_m_step_w, student_t_m_step_sigma2, student_t_m_step_nu).
+
+    While computation of r could be reused by the m_step for sigma2 I have prefer to keep it
+    separately for clarity.
 
     Assumes regression R^D -> R (single output): w has shape (D,1) and b has shape (1,1).
-    nu (degrees of freedom) is required, sigma2 (scale) defaults to 1.
-
-    E step computes the expected precision weights, pi_n, from the residuals
-    of the current fit; M step updates the model by solving the induced
-    weighted least squares problem.
     """
-    ## forward operation
     y = computation_graph_linear(x,w,b)
-
-    ## E step: expected precision weights given the current residuals
     r = t-y
-    pi = 1 / (nu*sigma2 + r**2)
+    return (nu+1)*sigma2 / (nu*sigma2 + r**2)
 
-    ## M step: weighted least squares update
-
+def student_t_m_step_w(x,t,pi):
+    """
+    Coordinate M-step for w,b: weighted least squares using the E-step weight pi
+    (student_t_e_step), holding sigma2 and nu fixed.
+    """
     # extend x with a column of ones to account for the bias
     x_ext = np.concatenate([x, np.ones((x.shape[0],1))], axis = 1)
 
@@ -536,3 +643,37 @@ def step_student_t_least_square(x,t,w,b,nu,sigma2=1):
     b_new = w_ext[-1:]
 
     return w_new, b_new
+
+def student_t_m_step_sigma2(x,t,w,b,pi):
+    """
+    Coordinate M-step for sigma2: weighted average of the squared residuals, reusing
+    the very same E-step weight pi (student_t_e_step) used by student_t_m_step_w, not
+    recomputed. (w,b) here are the freshly updated values from student_t_m_step_w, so
+    the residual reflects the latest w,b while pi stays frozen at its E-step value.
+    """
+    y = computation_graph_linear(x,w,b)
+    r = t-y
+    return np.mean(pi * r**2)
+
+def student_t_nu_score(nu,x,t,w,b,sigma2):
+    """
+    Left-hand side of Equation (30) in Liu and Rubin (1995) (the ECME CM-step for nu,
+    specialized to our univariate, fully-observed regression case), rewritten in terms
+    of the E-step weight pi_n(nu)=(nu+1)*sigma2/(nu*sigma2+r_n**2). Its unique root in
+    nu (the function is strictly monotonic, see the "Optimizing wrt nu" notebook cell)
+    is the M-step update for nu, given (w,b,sigma2) fixed. Used internally by
+    student_t_m_step_nu; unlike the other two M-steps, this one has to recompute the
+    weight itself, at every candidate nu tried during the search.
+    """
+    pi = student_t_e_step(x,t,w,b,nu,sigma2)
+    return (digamma((nu+1)/2) - digamma(nu/2) + 1 + np.log(nu/(nu+1))
+            + np.mean(np.log(pi) - pi))
+
+def student_t_m_step_nu(x,t,w,b,sigma2,bracket=(1e-3,1000.0)):
+    """
+    Coordinate M-step for nu: unlike student_t_m_step_w and student_t_m_step_sigma2
+    (which maximize the frozen-weight Q-function), this one maximizes the actual
+    log-likelihood directly, given (w,b,sigma2) fixed; solved via Brent's method on
+    student_t_nu_score.
+    """
+    return brentq(student_t_nu_score, bracket[0], bracket[1], args=(x,t,w,b,sigma2))
