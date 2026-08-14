@@ -240,7 +240,7 @@ cg_rl_R201 ={
     #'data_x_range_u' : 7,
     #'fixed_bias' : 0.5,
     #'y_axis_inc_text_data' : 0.1,
-    'losses_named' : {'bce' : Namespace(**loss_bce_rl_R01), 'brier': Namespace(**loss_brier_rl_R01) },
+    'losses_named' : {'bce' : Namespace(**loss_bce_rl_R201), 'brier': Namespace(**loss_brier_rl_R201) },
     'losses' : [Namespace(**loss_bce_rl_R201), Namespace(**loss_brier_rl_R201)]
 }
 

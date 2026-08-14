@@ -377,7 +377,8 @@ def grad_heteroscedastic_loss_wrt_softplus_model(x,t,w,b,w_sigma,b_sigma,only_si
 
     Assumes regression R^D -> R (single output): w has shape (D,1), w_sigma has shape (D_sigma,1);
     b,b_sigma have shape (1,1). Mean is softplus(x@w+b), per-point variance is exp(x_sigma@w_sigma+b_sigma).
-    x_sigma are the features fed into the variance model; defaults to x if not given.
+    x_sigma are the features fed into the variance model; defaults to x if not given. This allows, for instancce
+    using x to parameterize the mean and an different set of basis to parameterize x_sigma.
 
     The w_sigma,b_sigma gradient is identical to grad_heteroscedastic_loss_wrt_linear_model (it only
     depends on the residual a=t-y, not on how y was computed). The w,b gradient picks up an extra
