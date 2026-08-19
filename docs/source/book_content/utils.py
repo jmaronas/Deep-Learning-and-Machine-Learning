@@ -7,20 +7,6 @@ from matplotlib.patches import FancyArrowPatch
 from mpl_toolkits.mplot3d import proj3d
 
 
-## Display 3D arrows
-# source: https://stackoverflow.com/questions/29188612/arrows-in-matplotlib-using-mplot3d
-class Arrow3D(FancyArrowPatch):
-    def __init__(self, xs, ys, zs, *args, **kwargs):
-        super().__init__((0,0), (0,0), *args, **kwargs)
-        self._verts3d = xs, ys, zs
-
-    def do_3d_projection(self, renderer=None):
-        xs3d, ys3d, zs3d = self._verts3d
-        xs, ys, zs = proj3d.proj_transform(xs3d, ys3d, zs3d, self.axes.M)
-        self.set_positions((xs[0],ys[0]),(xs[1],ys[1]))
-
-        return np.min(zs)
-
 ## function implementing squared loss function
 def squared_loss_function(t,y,*args):
     return (t-y)**2
@@ -69,18 +55,21 @@ def bce_loss_function(t,y, clip = None,*args):
 ## function implementing categorical cross entropy (multiclass generalization of BCE)
 def categorical_crossentropy_loss_function(t,y, clip = None,*args):
     '''
-    t,y have shape (N,K): t is one-hot (one row per point, a 1 in the true class, 0 elsewhere),
-    y is a predicted probability vector per point (e.g. the output of a softmax). Returns the
-    per-point loss, shape (N,1).
+    t has shape (N,) or (N,1): integer class label per point (0-indexed). y has shape (N,K):
+    predicted probability vector per point (e.g. the output of a softmax). Returns the
+    per-point loss, shape (N,1). Indexes y directly at the true class instead of taking a
+    one-hot t and summing, which would multiply by (and compute log of) K-1 entries per point
+    that get discarded anyway.
     '''
-    log_y = np.log(y)
+    t = np.asarray(t).reshape(-1)
+    log_y = np.log(y[np.arange(len(t)), t]).reshape(-1,1)
 
     ## add +- 1e12 for numerical stability on infs, same convention as bce_loss_function
     if isinstance(clip,float):
         log_y[log_y == np.inf] = clip
         log_y[log_y == -np.inf] = -clip
 
-    return -np.sum(t*log_y, axis=1, keepdims=True)
+    return -log_y
 
 ## function implementing an activation function
 def activation_function_linear(x):
@@ -136,12 +125,12 @@ def computation_graph_softmax(x,w,b):
     '''
     This function represents a computational graph, a neural network, that implements a
     linear operation followed by a Softmax link.
-    Assumes classification R^D -> K classes: x has shape (N,D), w has shape (D,K), and,
-    unlike every other computation_graph_* above, b has shape (1,K) rather than (K,1)
-    (we need it to broadcast against the (N,K) result of x@w, one bias per class, not
-    one bias per sample). Returns y with shape (N,K), each row a probability vector.
+    Assumes classification R^D -> K classes: x has shape (N,D), w has shape (D,K), and b
+    has K entries, in either shape (1,K) or (K,1) (accepted and reshaped to (1,K) here so
+    it broadcasts against the (N,K) result of x@w, one bias per class, not one per sample).
+    Returns y with shape (N,K), each row a probability vector.
     '''
-    z = np.matmul(x,w) + b
+    z = np.matmul(x,w) + np.reshape(b, (1,-1))
     return activation_function_softmax(z)
 
 ## function that implements the computational graph
@@ -474,23 +463,31 @@ def grad_brier_loss_wrt_sigmoid_model(x,t,w,b):
 
 def grad_categorical_crossentropy_loss_wrt_softmax_model(x,t,w,b):
     """
-    Applies chain rule. x has shape (N,D), t (one-hot) and y have shape (N,K),
-    w has shape (D,K), b has shape (1,K) (see computation_graph_softmax).
+    Applies chain rule. x has shape (N,D), t is an integer class label per point with shape
+    (N,) or (N,1) (0-indexed), y has shape (N,K), w has shape (D,K), b has K entries in
+    either shape (see computation_graph_softmax). Returns grad_w (D,K) and grad_b as a
+    column vector (K,1), the convention used throughout the book for a bias gradient.
 
     The softmax Jacobian dy/dz is not diagonal (every y_k depends on every z_j), and
     neither is the loss's own dL/dy; but exactly as for BCE, the two combine and
-    collapse into the same clean residual, dL/dz = y-t (derived in the theory notebook).
+    collapse into the same clean residual, dL/dz = y-t (derived in the theory notebook,
+    where t is written in its one-hot form for that derivation).
     """
     ## forward operation
     y = computation_graph_softmax(x,w,b)
 
     ## backward operation (compute gradients / backpropagation / reverse mode autodiff)
 
-    # dL/dz, already simplified (see above)
-    dL_dz = y-t
+    # dL/dz = y-t, t used here via its one-hot effect: subtract 1 from the true class column
+    t = np.asarray(t).reshape(-1)
+    dL_dz = y.copy()
+    dL_dz[np.arange(len(t)), t] -= 1
 
-    grad_w = np.matmul(np.transpose(x), dL_dz)
-    grad_b = np.sum(dL_dz, axis = 0, keepdims = True)
+    grad_w = np.matmul(np.transpose(x), dL_dz)  # X^T(P-T), see the "Optimization" section of the theory notebook
+    # (P-T)^T 1_N, derived in the same section; mirroring the theory literally would be
+    # np.transpose(dL_dz).sum(axis=1, keepdims=True), but the reshape below is cheaper
+    # (no wasted multiply-by-ones, no extra allocation) for the same (K,1) result
+    grad_b = np.sum(dL_dz, axis = 0).reshape(-1,1)
 
     return grad_w, grad_b
 
