@@ -1,8 +1,8 @@
-# Solving First order Linear Differential Equations
+# Solving First-Order Linear Differential Equations
 
 ## Integrating factor method to solve ODE
 
-This method of integration can be used to construct the solution to an non-homogeneous ODE.
+This method of integration can be used to construct the solution to a non-homogeneous ODE.
 
 
 $$
@@ -25,7 +25,7 @@ $$
 
 
 
-Note that the left hand side is the derivative of a product. Namely:
+Note that the left-hand side is the derivative of a product. Namely:
 
 
 $$
@@ -44,7 +44,7 @@ $$
 $$
 
 
-Since the integral of the derivative is the argument itself we have:
+Since the integral of the derivative is the argument itself, we have:
 
 
 $$
@@ -58,4 +58,4 @@ $$
 $$
 
 
-where we push last exponential into the integral since it is constant wrt the argument of integration.
+where we push the last exponential into the integral since it is constant wrt the argument of integration.
