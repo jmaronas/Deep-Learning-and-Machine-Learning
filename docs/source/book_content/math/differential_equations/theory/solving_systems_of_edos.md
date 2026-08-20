@@ -1,6 +1,6 @@
-# Coupled Systems of First Order Linear Differential Equations
+# Coupled Systems of First-Order Linear Differential Equations
 
-We might be interested in systems of ordinary differential equations, and how to solve them. A coupled system of first order linear differential equations is a system of equations involving 0 and first derivative, linear terms and where the equations are coupled since changes in one term involve changes in the other equations. Let's see how we can solve them.
+We might be interested in systems of ordinary differential equations and how to solve them. A coupled system of first-order linear differential equations is a system of equations involving $0$ and first derivatives, linear terms, and where the equations are coupled since changes in one term involve changes in the other equations. Let's see how we can solve them.
 
 Consider the coupled system given by:
 
@@ -17,9 +17,9 @@ with initial conditions $x(t_0), y(t_0)$
 
 ## Direct method option 1
 
-The direct method I came with is a nightmare and I am not sure if there are better ways of arriving at this, since, to be honest, most of the things I have found so far use the follow up techniques to solve these systems of differential equations.
+The direct method I came up with is a nightmare, and I am not sure if there are better ways of arriving at this, since, to be honest, most of the things I have found so far use the follow-up techniques to solve these systems of differential equations.
 
-We can start by looking at each of the differential equations from the system, separately.
+We can start by looking at each of the differential equations from the system separately.
 
 From:
 
@@ -37,7 +37,7 @@ x(t) = e^{-(t-t_0)}x(t_0) + \int^t_{t_0} e^{-(t-\tau)}y(\tau) d\tau
 $$
 
 
-However, the solution is still coupled since it depends on the form of $y(\tau)$ which is unkown. If we solve the other differential equation:
+However, the solution is still coupled since it depends on the form of $y(\tau)$, which is unknown. If we solve the other differential equation:
 
 
 $$
@@ -45,7 +45,7 @@ $$
 $$
 
 
-with the same terms as above gives:
+with the same terms as above, gives:
 
 
 $$
@@ -53,39 +53,36 @@ y(t) = e^{-(t-t_0)}y(t_0) + e^{-t}\int^t_{t_0} e^\tau x(\tau) d\tau
 $$
 
 
-We can now substitute one of the solutions into the other yielding:
+We can now substitute one of the solutions into the other, yielding:
 
 
 $$
 \begin{split}
-y(t) &= e^{-(t-t_0)}y(t_0) + e^{-t}\int^t_{t_0} e^\tau \left[e^{-(\tau-t_0)}x(t_0) +  e^{-\tau}\int^\tau_{\tau_0} e^{-\tau'}y(\tau') d\tau'\right] d\tau\\
+y(t) &= e^{-(t-t_0)}y(t_0) + e^{-t}\int^t_{t_0} e^\tau \left[e^{-(\tau-t_0)}x(t_0) +  e^{-\tau}\int^\tau_{t_0} e^{\tau'}y(\tau') d\tau'\right] d\tau\\
 %
 %
-y(t) &= e^{-(t-t_0)}y(t_0) + e^{-t}\int^t_{t_0} e^\tau e^{-(\tau-t_0)}x(t_0)d\tau + e^{-t}\int^t_{t_0} e^\tau  e^{-\tau}\int^\tau_{\tau_0} e^{-\tau'}y(\tau') d\tau'd\tau\\
+y(t) &= e^{-(t-t_0)}y(t_0) + e^{-t}\int^t_{t_0} e^\tau e^{-(\tau-t_0)}x(t_0)d\tau + e^{-t}\int^t_{t_0} e^\tau  e^{-\tau}\int^\tau_{t_0} e^{\tau'}y(\tau') d\tau'd\tau\\
 %
 %
-y(t) &= e^{-(t-t_0)}y(t_0) + e^{-t}\int^t_{t_0} e^{t_0}x(t_0)d\tau + e^{-t}\int^t_{t_0} \int^\tau_{\tau_0} e^{-\tau'}y(\tau') d\tau'd\tau\\
+y(t) &= e^{-(t-t_0)}y(t_0) + e^{-t}\int^t_{t_0} e^{t_0}x(t_0)d\tau + e^{-t}\int^t_{t_0} \int^\tau_{t_0} e^{\tau'}y(\tau') d\tau'd\tau\\
 %
 %
-y(t) &= e^{-(t-t_0)}y(t_0) + e^{-t+t_0}x(t_0)(t-t_0) + e^{-t}\int^t_{t_0} \int^\tau_{\tau_0} e^{-\tau'}y(\tau') d\tau'd\tau\\
+y(t) &= e^{-(t-t_0)}y(t_0) + e^{-t+t_0}x(t_0)(t-t_0) + e^{-t}\int^t_{t_0} \int^\tau_{t_0} e^{\tau'}y(\tau') d\tau'd\tau\\
 \end{split}
 $$
 
+*Note: Claude suggested changing the lower integration limit from $\tau_0$ to $t_0$. Since I am not yet an expert in ODEs, I am leaving Claude's edit in place, but I am leaving this note here just in case Claude got it wrong.*
 
-I might have make small errors because haven¡t double check properly reason. However, I am not particularly interested in solving the equation through this form. We will now continue subsituting $y(\tau')$. And this has remembered me what we see in [1] around equations 2.12 to 2.15. So it looks like this will end up in a series that is the Taylor expansion of the function giving the solutions I am going to calculate later. I am not sure this will end up in that, but it looks like we end up in a very similar proceedure. In any case, this method of solving the system is not interesting.
-
-
+I might have made small errors because haven't double check properly reason. However, I am not particularly interested in solving the equation through this form. We will now continue substituting $y(\tau')$. And this has reminded me of what we see in [1] around equations 2.12 to 2.15. So it looks like this will end up in a series that is the Taylor expansion of the function giving the solutions I am going to calculate later. I am not sure this will end up in that, but it looks like we end up in a very similar procedure. In any case, this method of solving the system is not interesting.
 
 ## Direct method option 2
 
 See https://resource.download.wjec.co.uk/vtc/2018-19/wjec18-19_1.3/eng/coupled-differential-equations-unit-4.pdf
 
 
-
 ## Sustitution or change of variables
 
-Sustitution works by finding a function that simplifies the system. In this case the following sustitution will decouple the system.
-
+Sustitution works by finding a function that simplifies the system. In this case, the following sustitution will decouple the system.
 
 $$
 \begin{split}
@@ -94,12 +91,12 @@ $$
 \end{split}
 $$
 
-
-we can take derivative on both sides yielding:
-
+we can take the derivative on both sides, yielding:
 
 $$
+\begin{split}
 \frac{d c(t)}{dt} = \frac{d x(t)}{dt} - \frac{d y(t)}{dt}
+\end{split}
 $$
 
 
@@ -115,15 +112,17 @@ $$
 $$
 
 
-yielding a decoupled system since know the differential equation only depends on itself. We recognize an homogeneous time invariant ODE with $F = -2$ solution:
+yielding a decoupled system since we know the differential equation only depends on itself. We recognize a homogeneous time-invariant ODE with $F = -2$ solution:
 
 
 $$
+\begin{split}
 c(t) = e^{-2(t-t_0)}c(t_0)
+\end{split}
 $$
 
 
-Once we have solved $c(t)$ we need to recover back both $x(t)$ and $y(t)$. Using the fact that: $c(t) = x(t)-y(t)$ we know that:
+Once we have solved $c(t)$, we need to recover both $x(t)$ and $y(t)$. Using the fact that: $c(t) = x(t)-y(t)$ we know that:
 
 
 $$
@@ -136,7 +135,6 @@ $$
 
 which can be recognized as a non homogeneous ODE with $F=0$, $C=0$, $L=c(t_0)e^{2t_0}$ and $w(t) = e^{-2t}$. The solution is thus:
 
-
 $$
 \begin{split}
 &y(t) = y(t_0) + c(t_0)e^{2t_0}\int^t_{t_0} e^{-2\tau} d\tau;\\
@@ -146,11 +144,7 @@ $$
 \end{split}
 $$
 
-
-
 Finally substituting initial condition $c(t_0) = x(t_0)-y(t_0)$, yields:
-
-
 
 $$
 \begin{split}
@@ -163,11 +157,11 @@ $$
 
 
 
-We now solve for $x(t)$ to show how different option yield different ways to arrive at the same solution, with different complexity.
+We now solve for $x(t)$ to show how different options yield different ways to arrive at the same solution, with different complexity.
 
 ### Solving for x(t) option 1 (super easy)
 
-Using the fact that $c(t) = x(t) - y(t)$, we know that $x(t) = c(t) + y(t)$.  Since we know $c(t)$ and $y(t)$ we can substitute. This yields:
+Using the fact that $c(t) = x(t) - y(t)$, we know that $x(t) = c(t) + y(t)$.  Since we know $c(t)$ and $y(t)$, we can substitute. This yields:
 
 
 $$
@@ -193,13 +187,13 @@ $$
 $$
 
 
-where the only reason to using bold notation is to highlight the solution.
+where the only reason for using bold notation is to highlight the solution.
 
 
 
 ### Solving for x(t) option 2 (easy)
 
-Once $c(t)$ is solved, we could use the fact that $c(t) = x(t)-y(t)$  is true, in a different way. Rather than noting that:
+Once $c(t)$ is solved, we could use the fact that $c(t) = x(t)-y(t)$  is true in a different way. Rather than noting that:
 
 
 $$
@@ -222,7 +216,7 @@ $$
 $$
 
 
-which is basically the same differential equation we solved in step above but noting that  $F=0$, $C=0$, $L=-c(t_0)e^{2t_0}$ and $w(t) = e^{-2t}$. The solution is thus, the same as above but changing the sign of the term on the rightest part of the equation:
+which is basically the same differential equation we solved in the step above, but noting that  $F=0$, $C=0$, $L=-c(t_0)e^{2t_0}$ and $w(t) = e^{-2t}$. The solution is thus the same as above, but with the sign of the term on the rightmost part of the equation changed:
 
 
 $$
@@ -244,7 +238,7 @@ $$
 $$
 
 
-which again is very similarly solve by considering that just one sign is changing:
+which again is very similarly solved by considering that just one sign is changing:
 
 
 $$
@@ -266,13 +260,13 @@ $$
 $$
 
 
-where the only reason to using bold notation is to highlight the solution.
+where the only reason to use bold notation is to highlight the solution.
 
 
 
-### Solving for x(t) option 3 (you'll better take a beer)
+### Solving for x(t) option 3 (you'd better take a beer)
 
-Once we have solved for $y(t)$ we can substitute into $\frac{d x(t)}{dt} = y(t) - x(t)$ and solve the resulting differential equation. This gives:
+Once we have solved for $y(t)$, we can substitute into $\frac{d x(t)}{dt} = y(t) - x(t)$ and solve the resulting differential equation. This gives:
 
 
 $$
@@ -287,7 +281,7 @@ $$
 \frac{d x(t)}{dt} =  y(t_0) + \frac{1}{2}c(t_0) -\frac{1}{2}c(t_0)e^{2t_0}e^{-2t} - x(t);\\
 $$
 
-which we recognize as linear time invariant inhomogeneous ode with: $C =  y(t_0) + \frac{1}{2}c(t_0)$, $L=-\frac{1}{2}c(t_0)e^{2t_0}$, $w(t) = e^{-2t}$  and $F = -1$. We know the solution to this ODE is given by:
+which we recognize as a linear time-invariant inhomogeneous ODE with: $C =  y(t_0) + \frac{1}{2}c(t_0)$, $L=-\frac{1}{2}c(t_0)e^{2t_0}$, $w(t) = e^{-2t}$  and $F = -1$. We know the solution to this ODE is given by:
 
 
 
@@ -352,9 +346,9 @@ $$
 
 ## Linear Algebra
 
-It turns out that we can compute the solution to a system of differential equations, using linear algebra. The idea is to express the system using matrices (as commonly done with normal systems) and by diagonalizing the matrix we can end up in a change of variables that provides a system of decoupled differential equations. These differential equations end up being simple homogeneous equations so there is no need to start solving convolutions and so on, as we have previously done.
+It turns out that we can compute the solution to a system of differential equations using linear algebra. The idea is to express the system using matrices (as commonly done with normal systems), and by diagonalizing the matrix we can end up in a change of variables that provides a system of decoupled differential equations. These differential equations end up being simple homogeneous equations, so there is no need to start solving convolutions and so on, as we have previously done.
 
-Note that since we can define the vector $z(t)=[x(t),y(t)]^T$ . Then, the system:
+Note that we can define the vector $z(t)=[x(t),y(t)]^T$. Then, the system:
 
 
 $$
@@ -391,7 +385,7 @@ The initial conditions are now $z(t_0)=[x(t_0),y(t_0)]^T$
 
 We can write $A = PDP^{-1}$
 
-where $D$ is a diagonal matrix where each element in the diagonal is an eigenvalue of $A$, and $P$ is a matrix with columns given by the eigenvectors.
+where $D$ is a diagonal matrix where each element on the diagonal is an eigenvalue of $A$, and $P$ is a matrix with columns given by the eigenvectors.
 
 #### Computing eigenvalues $\lambda_i$
 
@@ -454,7 +448,7 @@ which gives: $v_{11} = -v_{12}$ in both equations. So the associated eigenvector
 
 
 
-For the other eigenvalue it can be shown in a similar way that the eigenvector is given by $v_2 = [1,1]^T$ 
+For the other eigenvalue, it can be shown in a similar way that the eigenvector is given by $v_2 = [1,1]^T$ 
 
 So $A=PDP^{-1}$ can be written as:
 
@@ -479,7 +473,7 @@ $$
 $$
 
 
-In other words we have:
+In other words, we have:
 
 
 
@@ -503,7 +497,7 @@ $$
 
 ### Turning a coupled system into a decoupled one
 
-Once we have express $A$ in terms of a diagonal matrix, we note that the system can be rewritten as:
+Once we have expressed $A$ in terms of a diagonal matrix, we note that the system can be rewritten as:
 
 
 $$
@@ -559,7 +553,7 @@ u_2(t) &= \frac{1}{2}\left(x(t) + y(t)\right)\\
 $$
 
 
-So noting that $u(t)$ is a vector valued function of two dimensions, the system of differential equations is given by:
+So, noting that $u(t)$ is a vector-valued function of two dimensions, the system of differential equations is given by:
 
 
 $$
@@ -586,7 +580,7 @@ $$
 $$
 
 
-We have know two decoupled differential equations. The 0 multiplying $u_2(t)$ is to make clear that the solution is just the initial condition. Now, since these differential equations are homogeneous with $F = -2$ and $F = 0$, and assuming initial conditions $u_1(t_0)$, and $u_2(t_0)$, we have:
+We now have two decoupled differential equations. The 0 multiplying $u_2(t)$ is to make clear that the solution is just the initial condition. Now, since these differential equations are homogeneous with $F = -2$ and $F = 0$, and assuming initial conditions $u_1(t_0)$, and $u_2(t_0)$, we have:
 
 
 $$
@@ -600,7 +594,7 @@ $$
 
 #### Removing the change of variables
 
-To return to the solution in terms of $z(t)= [x(t),y(t)]^T$ we revert the change of variables $u(t) = P^{-1}z(t)$ to get $z(t)$ in terms of $u(t)$. To do so, since $Pu(t)=z(t)$ we have:
+To return to the solution in terms of $z(t)= [x(t),y(t)]^T$, we revert the change of variables $u(t) = P^{-1}z(t)$ to get $z(t)$ in terms of $u(t)$. To do so, since $Pu(t)=z(t)$ we have:
 
 
 $$
@@ -634,7 +628,7 @@ $$
 
 #### Setting up initial conditions.
 
-To get the initial conditions, we need to obtain $u(t_0)$  from $z(t_0)$ to replace in the solution. So now instead of getting $z(t)$ from $u(t)$ as we have just done to get the solution, we need the opposite.
+To get the initial conditions, we need to obtain $u(t_0)$  from $z(t_0)$ to replace in the solution. So now, instead of getting $z(t)$ from $u(t)$ as we have just done to get the solution, we need the opposite.
 
 The change of variables applies to initial conditions as well, which means: $u(t) = P^{-1}z(t)$. This implies: $u(t_0) = P^{-1}z(t_0)$, which is an operation I have done above to justify the dimensionality of $u(t)$. So:
 
@@ -703,7 +697,7 @@ y(t) &=-u_1(t_0)e^{-2(t-t_0)} + u_2(t_0) \\
 $$
 
 
-In summary we have:
+In summary, we have:
 
 
 $$
@@ -720,9 +714,9 @@ Recovering the same solutions as we have been recovering in all cases.
 
 ## Linear Algebra: a more general solution
 
-The fact that we can solve a linear system of ODEs using linear algebra, through the diagonalization of $A$ in terms of eigenvectors and eigenvalues, allows me to ask if we can actually get a general solution for these kind of systems, in terms of eigenvalues and eigenvectors. In fact it turns out that, under some conditions, we can, and this is a fantastic thing. 
+The fact that we can solve a linear system of ODEs using linear algebra, through the diagonalization of $A$ in terms of eigenvectors and eigenvalues, allows me to ask if we can actually get a general solution for these kinds of systems, in terms of eigenvalues and eigenvectors. In fact, it turns out that, under some conditions, we can, and this is a fantastic thing. 
 
-Previously, we start with a general system of the form:
+Previously, we started with a general system of the form:
 
 
 $$
@@ -733,9 +727,9 @@ $$
 $$
 
 
-where we did not assumed that $x(t)$ and $y(t)$ could not be vectors. But when we wrote down our example, and give a value for $A$ we assumed that $x(t),y(t) \in \mathbb{R}$. 
+where we did not assumed that $x(t)$ and $y(t)$ could not be vectors. But when we wrote down our example and gave a value for $A$, we assumed that $x(t),y(t) \in \mathbb{R}$. 
 
-So to get this general solution, the first step is to work with $x(t)\in \mathbb{R}^N,y(t) \in \mathbb{R}^M$. In this case the linear system can be written as:
+So to get this general solution, the first step is to work with $x(t)\in \mathbb{R}^N,y(t) \in \mathbb{R}^M$. In this case, the linear system can be written as:
 
 
 $$
@@ -743,7 +737,7 @@ $$
 $$
 
 
-so, with any loss of generality, we will just assume $z \in \mathbb{R}^D$. Note that $A$ is always a square matrix.
+so, without loss of generality, we will just assume $z \in \mathbb{R}^D$. Note that $A$ is always a square matrix.
 
 
 
@@ -753,13 +747,13 @@ Let's analyze the first initial conditions:
 
 1. The matrix $A$ is simmetric, i.e. $A = A^T$
 
-​	Since the matrix is simmetric we know it will have $D$ independent orthogonal eigenvectors. However, we will use their orthonormal version.
+​	Since the matrix is symmetric, we know it will have $D$ independent orthogonal eigenvectors. However, we will use their orthonormal version.
 
-​	Since the matrix is simetric their eigenvalues are always positive.
+​	Since the matrix is simetric their eigenvalues are always real.
 
-​	Since we use an orthonormal set of eigenvectors, any matrix made up from this eigenvectors will satisfy that $P^T=P^{-1}$.
+​	Since we use an orthonormal set of eigenvectors, any matrix made up from these eigenvectors will satisfy that $P^T=P^{-1}$.
 
-*Note: To be honest I am not sure if there is a linear systems of ODEs that cannot be written down using this assumption, at least not in the ones I am interested at this moment*
+*Note: To be honest, I am not sure if there is a linear system of ODEs that cannot be written down using this assumption, at least not in the ones I am interested in at this moment*
 
 Under our assumption $A$ is always diagonizable, i.e we can express $A=PDP^{-1}$ where:
 
@@ -785,11 +779,11 @@ v_d^1 & v_d^2 & \cdots & v_d^{d-1} & v_d^d
 $$
 
 
-Since $P$ is made up by normalized eigenvectors we have that: $A=PDP^T$
+Since $P$ is made up of normalized eigenvectors, we have that: $A=PDP^T$
 
 
 
-Now, to start getting towards our solution remember we have that:
+Now, to start getting towards our solution, remember we have that:
 
 
 $$
@@ -802,7 +796,7 @@ $$
 $$
 
 
-and now make the change of variable: $u(t) = P^T z(t)$. This give us the following linear system:
+and now make the change of variable: $u(t) = P^T z(t)$. This gives us the following linear system:
 
 
 $$
@@ -818,7 +812,7 @@ $$
 $$
 
 
-and the solution to each of this differential equations is given by:
+and the solution to each of these differential equations is given by:
 
 
 $$
@@ -826,9 +820,9 @@ u_d(t) = u_d(t_0)e^{\lambda_d(t-t_0)}
 $$
 
 
-since we have an homogeneous ode with $F=\lambda_d$. 
+since we have a homogeneous ODE with $F=\lambda_d$. 
 
-To revert back the transformation of variables and to recover the solution we have that:
+To revert back the transformation of variables and to recover the solution, we have that:
 
 
 $$
@@ -845,14 +839,14 @@ $$
 
 
 
-Initial conditions are recovered back by:
+Initial conditions are recovered by:
 
 $$
 u(t_0) = P^T z(t_0)
 $$
 
 
-and since $P^T$ is a matrix with each row being one eigenvector this relation can be directly obtained by the dot product between each eigenvector and $z(t_0)$. In other words, we have that:
+and since $P^T$ is a matrix with each row being one eigenvector, this relation can be directly obtained by the dot product between each eigenvector and $z(t_0)$. In other words, we have that:
 
 
 $$
@@ -871,7 +865,7 @@ $$
 
 #### Example
 
-Let's check if this global solution holds for our previous example. First of all note that:
+Let's check if this global solution holds for our previous example. First of all, note that:
 
 
 $$
@@ -905,7 +899,7 @@ A = \begin{pmatrix}
 $$
 
 
-which is a symetric matrix. Thus diagonalization implies:
+which is a symmetric matrix. Thus, diagonalization implies:
 
 
 $$
@@ -928,7 +922,7 @@ D &= \begin{pmatrix}
 $$
 
 
-where know we use normalized eigenvectors. 
+where now we use normalized eigenvectors. 
 
 Applying the solution we have:
 
@@ -967,7 +961,7 @@ y(t) &= \sum_{j=1}^{2} v_2^{j} \sum_{i=1}^2 v_i^{j} z_i(t_0)e^{\lambda_j(t-t_0)}
 $$
 
 
-Recovering back our usual solutions:
+Recovering our usual solutions:
 
 
 $$
