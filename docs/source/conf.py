@@ -83,15 +83,14 @@ html_theme_options = {
 templates_path = ['_templates']
 exclude_patterns = [
     "book_content/_macros.md",
-    "book_content/linear_models/theory/notes_normalization_conditioning.md",
-    "book_content/linear_models/theory/notes_ols_consistency.md",
+    "book_content/linear_models/**",
     "book_content/clustering/**",
     "book_content/notes_video_animation_optimization.md",
-    "book_content/math/optimization/OPTIMIZATION_SESSION_NOTES.md",
+    "book_content/math/index.md",
+    "book_content/math/optimization/**",
+    "book_content/math/computation/**",
+    "book_content/assesments_index.md",
     "book_content/AUDIT_INSTRUCTIONS.md",
-    # --- TEMPORARY: first minimal deploy test, index page only, remove once book_content is ready ---
-    "book_content/**",
-    # --- END TEMPORARY ---
 ]
 
 # =========================

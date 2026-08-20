@@ -78,9 +78,7 @@ This project is my effort to consolidate all that into a clean, structured, and 
 
 Why JuanBook? Well just did not want yet another HandBook.
 
-<!-- TEMPORARY: book_content not deployed yet, link disabled until book_content/** is un-excluded
 📒 Click here to go to the [JuanBook](book_content/book_index)
--->
 
 
 ## 🎯 Purpose
@@ -125,10 +123,8 @@ Contributions to the JuanBook are properly acknowledged in the different files.
 
 </div>
 
-<!-- TEMPORARY: book_content not deployed yet, toctree entry disabled until book_content/** is un-excluded
 ```{toctree}
 :hidden:
 
 book_content/book_index
 ```
--->
