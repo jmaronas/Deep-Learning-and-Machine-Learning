@@ -6,6 +6,11 @@ from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.patches import FancyArrowPatch
 from mpl_toolkits.mplot3d import proj3d
 
+## Convention: by default, weight/bias vectors are treated as column vectors ((D,1), (C,1), etc.)
+## to align with the notation used in the theory notebooks, even though a row-vector convention
+## would be computationally more efficient (avoids reshapes/transposes in several of the functions
+## below, e.g. for broadcasting a bias correctly across multiple outputs C>1). Whether to switch to
+## row vectors is a decision left for a future revision, not something to change silently.
 
 ## function implementing squared loss function
 def squared_loss_function(t,y,*args):
@@ -115,7 +120,12 @@ def computation_graph_linear(x,w,b):
 
 ## function that implements the computational graph
 def computation_graph_sigmoid(x,w,b):
-    ''' This function represents a computational graph, a neural network, that implements a linear operation'''
+    '''
+    This function represents a computational graph, a neural network, that implements a linear
+    operation followed by a Sigmoid link.
+    Only verified for regression/classification R^D -> R (single output): w has shape (D,1) and
+    b has shape (1,1).
+    '''
     # this is the W^0 x from the theory above implemented using a transposition ;)
     y = activation_function_sigmoid(np.matmul(x,w) + b)
     return y
@@ -135,19 +145,31 @@ def computation_graph_softmax(x,w,b):
 
 ## function that implements the computational graph
 def computation_graph_relu(x,w,b):
-    ''' This function represents a computational graph, a neural network, that implements a linear operation followed by a ReLU link'''
+    '''
+    This function represents a computational graph, a neural network, that implements a linear
+    operation followed by a ReLU link.
+    Only verified for regression R^D -> R (single output): w has shape (D,1) and b has shape (1,1).
+    '''
     y = activation_function_relu(np.matmul(x,w) + b)
     return y
 
 ## function that implements the computational graph
 def computation_graph_softplus(x,w,b):
-    ''' This function represents a computational graph, a neural network, that implements a linear operation followed by a Softplus link'''
+    '''
+    This function represents a computational graph, a neural network, that implements a linear
+    operation followed by a Softplus link.
+    Only verified for regression R^D -> R (single output): w has shape (D,1) and b has shape (1,1).
+    '''
     y = activation_function_softplus(np.matmul(x,w) + b)
     return y
 
 ## function that implements the computational graph
 def computation_graph_exponential(x,w,b):
-    ''' This function represents a computational graph, a neural network, that implements a linear operation followed by an Exponential link'''
+    '''
+    This function represents a computational graph, a neural network, that implements a linear
+    operation followed by an Exponential link.
+    Only verified for regression R^D -> R (single output): w has shape (D,1) and b has shape (1,1).
+    '''
     y = activation_function_exponential(np.matmul(x,w) + b)
     return y
 
@@ -210,7 +232,10 @@ def create_computation_graph_linear(n_in,n_out, mean = 0, std = 1):
 def create_computation_graph_linear_from_ols(x,t):
     '''
     Create elements of the computational graph, initialized at the OLS solution.
-    Assumes regression R^D -> R (single output): x has shape (N,D), t has shape (N,1).
+    x has shape (N,D), t has shape (N,1) for single-output regression, but also works for
+    multi-output regression with t of shape (N,C): fit_norm2_least_square solves the multi-output
+    OLS directly, and the resulting bias w_ext[-1:] is already (1,C), the shape
+    computation_graph_linear/_sigmoid/_relu/_softplus/_exponential expect for correct broadcasting.
     '''
     # extend x with a column of ones to account for the bias
     x_ext = np.concatenate([x, np.ones((x.shape[0],1))], axis = 1)
@@ -411,6 +436,8 @@ def grad_heteroscedastic_loss_wrt_softplus_model(x,t,w,b,w_sigma,b_sigma,only_si
 def grad_bce_loss_wrt_sigmoid_model(x,t,w,b):
     """
     Applies chain rule.
+
+    Only verified for R^D -> R (single output): w has shape (D,1) and b has shape (1,1).
     """
     ## forward operation
     z = computation_graph_linear(x,w,b)
@@ -442,6 +469,8 @@ def grad_bce_loss_wrt_sigmoid_model(x,t,w,b):
 def grad_brier_loss_wrt_sigmoid_model(x,t,w,b):
     """
     Applies chain rule.
+
+    Only verified for R^D -> R (single output): w has shape (D,1) and b has shape (1,1).
     """
     ## forward operation
     z = computation_graph_linear(x,w,b)
@@ -495,6 +524,8 @@ def grad_squared_loss_wrt_relu_model(x,t,w,b):
     """
     Applies chain rule.
 
+    Only verified for R^D -> R (single output): w has shape (D,1) and b has shape (1,1).
+
     For ReLU dy/dz, define the derivative as:
 
      1 if z > 0
@@ -523,6 +554,8 @@ def grad_squared_loss_wrt_relu_model(x,t,w,b):
 def grad_squared_loss_wrt_softplus_model(x,t,w,b):
     """
     Applies chain rule.
+
+    Only verified for R^D -> R (single output): w has shape (D,1) and b has shape (1,1).
     """
     ## forward operation
     z = computation_graph_linear(x,w,b)
@@ -545,6 +578,8 @@ def grad_squared_loss_wrt_softplus_model(x,t,w,b):
 def grad_squared_loss_wrt_exponential_model(x,t,w,b):
     """
     Applies chain rule.
+
+    Only verified for R^D -> R (single output): w has shape (D,1) and b has shape (1,1).
     """
     ## forward operation
     z = computation_graph_linear(x,w,b)
