@@ -1,7 +1,7 @@
 # Differential Equations
 
 ```{toctree}
-:maxdepth: 1
+:maxdepth: 2
 :caption: Differential Equations
 
 Ordinary Differential Equations <theory/edos.md>

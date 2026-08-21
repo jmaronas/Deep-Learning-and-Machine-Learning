@@ -65,6 +65,8 @@ $$
 \def\tr#1{\text{tr}\left(#1\right)}
 \def\vvec{\text{vec} }
 \def\sgn{\operatorname{sgn}}
+\def\argmax{\operatorname*{argmax}}
+\def\argmin{\operatorname*{argmin}}
 \def\dd{\mathrm{d}}
 \def\diag{\text{diag}}
 \def\Jac#1#2{J_{#1}^{#2}}
