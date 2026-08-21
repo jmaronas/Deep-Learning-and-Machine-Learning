@@ -22,6 +22,8 @@ $$
 \def\Pmat{\mathbf{P}}
 \def\Pmatt{\mathbf{P}^T}
 \def\Qmatt{\mathbf{Q}^T}
+\def\rvec{\mathbf{r}}
+\def\rvect{\mathbf{r}^T}
 \def\tvec{\mathbf{t}}
 \def\tvect{\mathbf{t}^T}
 \def\Tmat{\mathbf{T}}
