@@ -12,11 +12,17 @@ $$
 \def\Cmat{\mathbf{C}}
 \def\Cmatt{\mathbf{C}^T}
 \def\Imat{\mathbf{I}}
+\def\Kmat{\mathbf{K}}
+\def\Kmatt{\mathbf{K}^T}
+\def\Kmatinv{\mathbf{K^{-1}}}
 \def\lvec{\mathbf{l}}
 \def\Lmat{\mathbf{L}}
 \def\Lmatt{\mathbf{L}^T}
 \def\onevec{\mathbf{1}}
 \def\onevect{\mathbf{1}^T}
+\def\zerovec{\mathbf{0}}
+\def\uvec{\mathbf{u}}
+\def\uvect{\mathbf{u}^T}
 \def\pvec{\mathbf{p}}
 \def\pvect{\mathbf{p}^T}
 \def\Pmat{\mathbf{P}}
@@ -53,6 +59,7 @@ $$
 \def\zvect{\mathbf{z}^T}
 \def\Zmat{\mathbf{Z}}
 \def\Zmatt{\mathbf{Z}^T}
+\def\muvec{\boldsymbol{\mu}}
 \def\phivec{\boldsymbol{\phi}}
 \def\phimat{\boldsymbol{\Phi}}
 \def\sigmatwovec{\boldsymbol{\sigma^2}}
