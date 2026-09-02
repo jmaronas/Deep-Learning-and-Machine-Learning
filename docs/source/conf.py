@@ -86,6 +86,7 @@ exclude_patterns = [
     "book_content/linear_models/theory/notes_normalization_conditioning.md",
     "book_content/linear_models/theory/notes_ols_consistency.md",
     "book_content/clustering/**",
+    "book_content/deep_generative_models/**",
     "book_content/notes_video_animation_optimization.md",
     "book_content/math/optimization/OPTIMIZATION_SESSION_NOTES.md",
     "book_content/AUDIT_INSTRUCTIONS.md",
