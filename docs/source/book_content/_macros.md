@@ -40,12 +40,12 @@ $$
 \def\Vmatt{\mathbf{V}^T}
 \def\wvec{\mathbf{w}}
 \def\wvect{\mathbf{w}^T}
-\def\wvecsigma{\mathbf{w}_\sigma}
-\def\wvecsigmat{\mathbf{w}_{\sigma}^T}
+\def\wsigmatwovec{\mathbf{w}_{\sigma^2}}
+\def\wsigmatwovect{\mathbf{w}_{\sigma^2}^T}
 \def\Wmat{\mathbf{W}}
 \def\Wmatt{\mathbf{W}^T}
-\def\Wmatsigma{\mathbf{W}_\sigma}
-\def\Wmatsigmat{\mathbf{W}_{\sigma}^T}
+\def\Wsigmatwomat{\mathbf{W}_{\sigma^2}}
+\def\Wsigmatwomatt{\mathbf{W}_{\sigma^2}^T}
 \def\xvec{\mathbf{x}}
 \def\xvect{\mathbf{x}^T}
 \def\Xmat{\mathbf{X}}
@@ -63,7 +63,7 @@ $$
 \def\muvec{\boldsymbol{\mu}}
 \def\phivec{\boldsymbol{\phi}}
 \def\phimat{\boldsymbol{\Phi}}
-\def\sigmatwovec{\boldsymbol{\sigma^2}}
+\def\sigmatwovec#1{\boldsymbol{\sigma^2_{#1}}}
 \def\Sigmainv{\Sigma^{-1}}
 \def\pare#1{\left(#1\right)}
 \def\pareT#1{\left(#1\right)^{T}}
