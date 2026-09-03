@@ -4,9 +4,9 @@ import torch.nn as nn
 class DenoisingAutoencoder(nn.Module):
     def __init__(self, encoder_layers, decoder_layers):
         """
-        encoder_layers: list og tuples (in_dim, out_dim, activation)
+        encoder_layers: list of tuples (in_dim, out_dim, activation)
         decoder_layers: list of tuples (in_dim, out_dim, activation)
-        activation is nn.Module class or None to specify a linear activaiton
+        activation is nn.Module class or None to specify a linear activation
         """
         super().__init__()
 

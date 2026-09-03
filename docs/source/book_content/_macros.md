@@ -59,6 +59,7 @@ $$
 \def\zvect{\mathbf{z}^T}
 \def\Zmat{\mathbf{Z}}
 \def\Zmatt{\mathbf{Z}^T}
+\def\epsvec{\boldsymbol{\epsilon}}
 \def\muvec{\boldsymbol{\mu}}
 \def\phivec{\boldsymbol{\phi}}
 \def\phimat{\boldsymbol{\Phi}}
