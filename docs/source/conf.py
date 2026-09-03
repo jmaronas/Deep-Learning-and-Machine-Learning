@@ -55,7 +55,8 @@ bibtex_reference_style = "author_year"
 # =========================
 nb_execution_mode = "auto" #"off"   #off importante: evita ejecutar notebooks al build
 nb_merge_streams = True
-nb_execution_allow_errors = True
+nb_execution_allow_errors = False
+nb_execution_raise_on_error = True
 nb_kernel_name = "temario_ml"
 nb_execution_excludepatterns = []
 nb_render_markdown_format = "myst"  # so display(Markdown(...)) outputs (e.g. _macros.md) get $$...$$ math processed, not left as literal text
