@@ -60,7 +60,7 @@ nb_execution_raise_on_error = True
 nb_kernel_name = "temario_ml"
 nb_execution_excludepatterns = []
 nb_render_markdown_format = "myst"  # so display(Markdown(...)) outputs (e.g. _macros.md) get $$...$$ math processed, not left as literal text
-nb_execution_timeout = 120
+nb_execution_timeout = 400
 
 # =========================
 # HTML THEME (recomendado)
