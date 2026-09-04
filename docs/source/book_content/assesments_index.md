@@ -19,3 +19,12 @@ Regression <linear_models/assesments/1_Regression_assesment.ipynb>
 Linear Basis Function Models <linear_models/assesments/2_Linear_basis_function_models_ovefit_reg_assesment.ipynb>
 Binary Classification <linear_models/assesments/5_Binary_Classification_assesment.ipynb>
 ```
+
+## Clustering
+
+```{toctree}
+:maxdepth: 1
+:caption: Clustering
+
+KMeans Clustering <clustering/assesment/Clustering_KMeans_assesment.ipynb>
+```
