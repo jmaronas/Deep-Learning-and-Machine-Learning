@@ -234,22 +234,9 @@ class NICE(NICEVP):
     """
     def __init__(self, dim, hidden_dim, num_coupling_layers=4):
         super().__init__(dim = dim, hidden_dim=hidden_dim, num_coupling_layers = num_coupling_layers)
-
-        # Coupling layers with alternating flip
-        layers = []
-        for i in range(num_coupling_layers):
-            flip = (i % 2 == 1)
-            layers.append(CouplingLayer(dim, hidden_dim, flip=flip))
-
+        
         # add diagonal scaling
-        layers.append(DiagonalScalingMatrixLayer(dim))
-
-        ## list of coupling layers
-        self.layers = nn.ModuleList(layers)
-
-        # Prior distribution
-        self.prior = Independent(Normal(torch.zeros(dim), torch.ones(dim)), 1)
-
+        self.layers.append(DiagonalScalingMatrixLayer(dim))
 
 class RealNVP(_FlowModel):
     """

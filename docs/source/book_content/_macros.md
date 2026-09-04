@@ -30,6 +30,9 @@ $$
 \def\Qmatt{\mathbf{Q}^T}
 \def\rvec{\mathbf{r}}
 \def\rvect{\mathbf{r}^T}
+\def\svec{\mathbf{s}}
+\def\svect{\mathbf{s}^T}
+\def\Smat{\mathbf{S}}
 \def\tvec{\mathbf{t}}
 \def\tvect{\mathbf{t}^T}
 \def\Tmat{\mathbf{T}}
