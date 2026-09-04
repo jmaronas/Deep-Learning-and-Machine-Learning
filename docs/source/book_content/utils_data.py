@@ -93,3 +93,15 @@ def generate_fan_data(
         X.append(arm)
 
     return np.vstack(X)
+
+## generates a 2D "banana"-shaped synthetic dataset from a nonlinear transform of a Gaussian latent
+def generate_banana_data(N=1000):
+    # Latente gaussiano
+    z1 = np.random.randn(N)
+    z2 = np.random.randn(N)
+
+    # Transformación no lineal (banana)
+    x1 = z1**2
+    x2 = z2 + 0.3 * (z1 ** 4)
+
+    return np.column_stack([x1, x2])

@@ -5,4 +5,6 @@
 :caption: Deep Generative Models
 
 DenoisingAutoencoder.ipynb
+FlowModels.ipynb
+VAE.ipynb
 ```
