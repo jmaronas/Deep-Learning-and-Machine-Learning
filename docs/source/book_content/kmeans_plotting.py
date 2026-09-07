@@ -1,7 +1,6 @@
 import time
 import copy
 from IPython.display import display, Video
-from io import BytesIO
 import os
 
 import numpy as np
@@ -19,11 +18,8 @@ class PlotterBase:
         time.sleep(self.sleep_time)
 
     def save_video_frame(self):
-        buf = BytesIO()
-        self.fig.savefig(buf, format="png", dpi=100)
-
-        buf.seek(0)
-        frame = imageio.imread(buf) 
+        self.fig.canvas.draw()
+        frame = np.asarray(self.fig.canvas.buffer_rgba())[:, :, :3]
         self.writer.append_data(frame)
         
     def show_video(self):
