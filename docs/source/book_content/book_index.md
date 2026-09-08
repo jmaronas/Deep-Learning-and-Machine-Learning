@@ -8,6 +8,7 @@ Here is the index of the JuanBook, where you can find theory and assesments.
 
 math/index
 linear_models/index
+clustering/index
 sampling_methods/index
 deep_generative_models/index
 ```
