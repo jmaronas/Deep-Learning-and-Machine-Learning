@@ -7,6 +7,7 @@
 :caption: Math
 
 Gradient Descent <math/optimization/assesments/GradientDescent_assesment.ipynb>
+Automatic Differentiation <math/optimization/assesments/AutomaticDifferentiation_assesment.ipynb>
 ```
 
 ## Linear Models

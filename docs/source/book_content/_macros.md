@@ -11,6 +11,8 @@ $$
 \def\cvect{\mathbf{c}^T}
 \def\Cmat{\mathbf{C}}
 \def\Cmatt{\mathbf{C}^T}
+\def\hvec{\mathbf{h}}
+\def\hvect{\mathbf{h}^T}
 \def\Imat{\mathbf{I}}
 \def\Kmat{\mathbf{K}}
 \def\Kmatt{\mathbf{K}^T}
