@@ -29,3 +29,12 @@ Binary Classification <linear_models/assesments/5_Binary_Classification_assesmen
 
 KMeans Clustering <clustering/assesment/Clustering_KMeans_assesment.ipynb>
 ```
+
+## ML Toolkits
+
+```{toctree}
+:maxdepth: 1
+:caption: ML Toolkits
+
+Delving Deeper into PyTorch <ml_toolkits/assesments/DeeperIntoPytorch_assesment.ipynb>
+```

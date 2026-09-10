@@ -11,6 +11,8 @@ linear_models/index
 clustering/index
 sampling_methods/index
 deep_generative_models/index
+ml_toolkits/index
+neural_networks/index
 ```
 
 ```{toctree}
