@@ -88,6 +88,8 @@ exclude_patterns = [
     "book_content/linear_models/theory/notes_ols_consistency.md",
     "book_content/AUDIT_GIT_INSTRUCTIONS.md",
     "book_content/AUDIT_INSTRUCTIONS.md",
+    "book_content/neural_networks/assesments/FullyConnectedDNNs_assesment.ipynb",
+    "book_content/neural_networks/assesments/ConvolutionalDNN_assesment.ipynb",
 ]
 
 # =========================
