@@ -58,7 +58,10 @@ nb_merge_streams = True
 nb_execution_allow_errors = False
 nb_execution_raise_on_error = True
 nb_kernel_name = "temario_ml"
-nb_execution_excludepatterns = []
+nb_execution_excludepatterns = [
+    "book_content/neural_networks/assesments/FullyConnectedDNNs_assesment.ipynb",
+    "book_content/neural_networks/assesments/ConvolutionalDNN_assesment.ipynb",
+]
 nb_render_markdown_format = "myst"  # so display(Markdown(...)) outputs (e.g. _macros.md) get $$...$$ math processed, not left as literal text
 nb_execution_timeout = 400
 
@@ -88,8 +91,6 @@ exclude_patterns = [
     "book_content/linear_models/theory/notes_ols_consistency.md",
     "book_content/AUDIT_GIT_INSTRUCTIONS.md",
     "book_content/AUDIT_INSTRUCTIONS.md",
-    "book_content/neural_networks/assesments/FullyConnectedDNNs_assesment.ipynb",
-    "book_content/neural_networks/assesments/ConvolutionalDNN_assesment.ipynb",
 ]
 
 # =========================

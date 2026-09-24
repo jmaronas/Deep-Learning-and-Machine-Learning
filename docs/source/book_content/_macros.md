@@ -13,6 +13,8 @@ $$
 \def\Cmatt{\mathbf{C}^T}
 \def\hvec{\mathbf{h}}
 \def\hvect{\mathbf{h}^T}
+\def\Hmat{\mathbf{H}}
+\def\Hmatt{\mathbf{H}^T}
 \def\Imat{\mathbf{I}}
 \def\Kmat{\mathbf{K}}
 \def\Kmatt{\mathbf{K}^T}

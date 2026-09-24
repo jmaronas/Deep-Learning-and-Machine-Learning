@@ -38,3 +38,13 @@ KMeans Clustering <clustering/assesment/Clustering_KMeans_assesment.ipynb>
 
 Delving Deeper into PyTorch <ml_toolkits/assesments/DeeperIntoPytorch_assesment.ipynb>
 ```
+
+## Neural Networks
+
+```{toctree}
+:maxdepth: 1
+:caption: Neural Networks
+
+Fully Connected Neural Networks <neural_networks/assesments/FullyConnectedDNNs_assesment.ipynb>
+Convolutional Neural Networks <neural_networks/assesments/ConvolutionalDNN_assesment.ipynb>
+```
