@@ -30,6 +30,11 @@ jobs:
       - name: Install dependencies
         run: pip install -r docs/requirements.txt
 
+      - name: Pre-download NLP data/models
+        run: |
+          python -m nltk.downloader punkt punkt_tab
+          python -m spacy download es_core_news_sm
+
       - name: Register Jupyter kernel
         run: python -m ipykernel install --user --name temario_ml
 
