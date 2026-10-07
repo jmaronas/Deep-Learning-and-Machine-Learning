@@ -48,3 +48,14 @@ Delving Deeper into PyTorch <ml_toolkits/assesments/DeeperIntoPytorch_assesment.
 Fully Connected Neural Networks <neural_networks/assesments/FullyConnectedDNNs_assesment.ipynb>
 Convolutional Neural Networks <neural_networks/assesments/ConvolutionalDNN_assesment.ipynb>
 ```
+
+## Language Modelling
+
+```{toctree}
+:maxdepth: 1
+:caption: Language Modelling
+
+Tokenizers <language_modelling/assesment/1_NLP_Neural_Probabilistic_Language_Models_tokenizers_assesment.ipynb>
+Input Embeddings <language_modelling/assesment/2_NLP_Neural_Probabilistic_Language_Models_input_embeddings_assesment.ipynb>
+RNN Language Model <language_modelling/assesment/3_NLP_Neural_Probabilistic_Language_Models_RRNNLM_assesment.ipynb>
+```
