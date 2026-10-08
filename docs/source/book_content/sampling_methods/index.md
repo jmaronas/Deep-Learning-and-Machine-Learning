@@ -4,5 +4,5 @@
 :maxdepth: 2
 :caption: Sampling Methods
 
-SamplingMethods.ipynb
+theory/SamplingMethods.ipynb
 ```

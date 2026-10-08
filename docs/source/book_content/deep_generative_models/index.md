@@ -4,7 +4,7 @@
 :maxdepth: 2
 :caption: Deep Generative Models
 
-DenoisingAutoencoder.ipynb
-FlowModels.ipynb
-VAE.ipynb
+theory/DenoisingAutoencoder.ipynb
+theory/FlowModels.ipynb
+theory/VAE.ipynb
 ```
