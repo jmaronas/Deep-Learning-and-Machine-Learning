@@ -91,6 +91,9 @@ exclude_patterns = [
     "book_content/linear_models/theory/notes_ols_consistency.md",
     "book_content/AUDIT_GIT_INSTRUCTIONS.md",
     "book_content/AUDIT_INSTRUCTIONS.md",
+    "book_content/ml_toolkits/index.md",
+    "book_content/neural_networks/index.md",
+    "book_content/language_modelling/index.md",
 ]
 
 # =========================
