@@ -1,7 +1,5 @@
 # Assessments
 
-## Math
-
 ```{toctree}
 :maxdepth: 1
 :caption: Math
@@ -9,8 +7,6 @@
 Gradient Descent <math/optimization/assesments/GradientDescent_assesment.ipynb>
 Automatic Differentiation <math/optimization/assesments/AutomaticDifferentiation_assesment.ipynb>
 ```
-
-## Linear Models
 
 ```{toctree}
 :maxdepth: 1
@@ -21,8 +17,6 @@ Linear Basis Function Models <linear_models/assesments/2_Linear_basis_function_m
 Binary Classification <linear_models/assesments/5_Binary_Classification_assesment.ipynb>
 ```
 
-## Clustering
-
 ```{toctree}
 :maxdepth: 1
 :caption: Clustering
@@ -30,16 +24,13 @@ Binary Classification <linear_models/assesments/5_Binary_Classification_assesmen
 KMeans Clustering <clustering/assesment/Clustering_KMeans_assesment.ipynb>
 ```
 
-## ML Toolkits
-
 ```{toctree}
 :maxdepth: 1
-:caption: ML Toolkits
+:caption: Machine Learning Libraries
 
 Delving Deeper into PyTorch <ml_toolkits/assesments/DeeperIntoPytorch_assesment.ipynb>
+Numpy-Matplotlib-Sklearn <ml_toolkits/assesments/numpy_matplotlib_sklearn.md>
 ```
-
-## Neural Networks
 
 ```{toctree}
 :maxdepth: 1
@@ -48,8 +39,6 @@ Delving Deeper into PyTorch <ml_toolkits/assesments/DeeperIntoPytorch_assesment.
 Fully Connected Neural Networks <neural_networks/assesments/FullyConnectedDNNs_assesment.ipynb>
 Convolutional Neural Networks <neural_networks/assesments/ConvolutionalDNN_assesment.ipynb>
 ```
-
-## Language Modelling
 
 ```{toctree}
 :maxdepth: 1
