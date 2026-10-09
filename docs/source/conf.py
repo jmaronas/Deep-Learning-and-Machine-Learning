@@ -36,7 +36,7 @@ myst_enable_extensions = [
 togglebutton_hint = "Mostrar código"
 togglebutton_hint_hide = "Ocultar código"
 
-togglebutton_selector = ".cell_input"
+togglebutton_selector = ".cell_input, .toggle"
 
 nitpicky = True
 warning_is_error = True
