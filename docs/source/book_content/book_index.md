@@ -11,11 +11,5 @@ linear_models/index
 clustering/index
 sampling_methods/index
 deep_generative_models/index
-```
-
-```{toctree}
-:maxdepth: 1
-:caption: Book Assessments
-
 assesments_index
 ```
