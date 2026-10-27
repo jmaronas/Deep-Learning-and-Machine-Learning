@@ -24,6 +24,7 @@ $$
 \def\lvec{\mathbf{l}}
 \def\Lmat{\mathbf{L}}
 \def\Lmatt{\mathbf{L}^T}
+\def\Mmat{\mathbf{M}}
 \def\onevec{\mathbf{1}}
 \def\onevect{\mathbf{1}^T}
 \def\zerovec{\mathbf{0}}
