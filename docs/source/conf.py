@@ -17,6 +17,7 @@ author = 'Juan Maroñas Molano'
 extensions = [
     "myst_nb", # markdown plus notebooks
     "sphinx_togglebutton",
+    "sphinx_design",
     "sphinx.ext.autodoc",
     "sphinxcontrib.bibtex",
     "sphinx.ext.napoleon",      # Google / NumPy docstrings
@@ -75,6 +76,7 @@ html_sidebars = {
 html_static_path = ["_static"]
 html_css_files = [
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css",
+    "custom.css",
 ]
 
 html_theme_options = {

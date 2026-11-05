@@ -1,0 +1,38 @@
+/* course material dropdown headers, soft colors:
+   subject (red), review/course (yellow), theory/assessments (purple) */
+html details.sd-dropdown summary.sd-card-header.sd-bg-primary {
+  --pst-sd-dropdown-bg-color: #e8c6c6;
+}
+
+html details.sd-dropdown summary.sd-card-header.sd-bg-secondary {
+  --pst-sd-dropdown-bg-color: #efe6c1;
+}
+
+html details.sd-dropdown summary.sd-card-header.cm-fs-small {
+  --pst-sd-dropdown-bg-color: #d2b8f3;
+}
+
+/* dark mode: same colors, slightly darker */
+html[data-theme="dark"] details.sd-dropdown summary.sd-card-header.sd-bg-primary {
+  --pst-sd-dropdown-bg-color: #c99a9a;
+}
+
+html[data-theme="dark"] details.sd-dropdown summary.sd-card-header.sd-bg-secondary {
+  --pst-sd-dropdown-bg-color: #d2c48c;
+}
+
+html[data-theme="dark"] details.sd-dropdown summary.sd-card-header.cm-fs-small {
+  --pst-sd-dropdown-bg-color: #ad90d6;
+}
+
+/* dark text on the soft backgrounds also in dark mode */
+html[data-theme="dark"] details.sd-dropdown summary.sd-card-header.sd-bg-primary,
+html[data-theme="dark"] details.sd-dropdown summary.sd-card-header.sd-bg-secondary,
+html[data-theme="dark"] details.sd-dropdown summary.sd-card-header.cm-fs-small {
+  color: #14181e !important;
+}
+
+/* dropdown title one step below sd-fs-6 */
+.cm-fs-small {
+  font-size: 0.9rem !important;
+}
